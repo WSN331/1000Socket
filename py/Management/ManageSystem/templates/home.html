@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}主页{% endblock %}
+
+{% block head %}
+    <link href="{% static 'css/home.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title1 %}active{% endblock %}
+
+{% block content %}
+    <div class="main">
+        <h3 class="home-title" style="margin-top: 100px">设备状态</h3>
+        <form class="form-inline" style="text-align: center" action="" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="number" name="device-id" class="form-control" placeholder="请输入设备编号">
+            </div>
+            <button type="submit" class="btn btn-default btn-primary">搜索</button>
+        </form>
+        <div class="admin-table">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>设备ID</th>
+                    <th>设备地址</th>
+                    <th>设备状态</th>
+                    <th>设备操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for device in dev_list %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ device.device_id }}</td>
+                    <td>杭州</td>
+                    {% if device.device_state == '1' %}
+                        <td>在线</td>
+                    {% else %}
+                        <td>离线</td>
+                    {% endif %}
+                    <td>
+                        <a href="/do/{{ device.device_id }}">点击操作</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if dev_list.has_previous %}
+                    <li>
+                        <a href="{{ dev_list.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% for num in paginator.page_range %}
+                    {% if num == currentPage %}
+                        <li class="item active"><a href=?page="{{ num }}">{{ num }}</a></li>
+                    {% else %}
+                        <li class="item"><a href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if dev_list.has_next %}
+                    <li>
+                        <a href="{{ dev_list.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+    </nav>
+    </div>
+{% endblock %}

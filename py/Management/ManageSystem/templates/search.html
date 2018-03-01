@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}搜索{% endblock %}
+
+{% block head %}
+    <link href="{% static 'css/home.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title1 %}active{% endblock %}
+
+{% block content %}
+    <div class="main">
+         <div class="admin-table" style="margin-top: 100px">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>设备ID</th>
+                    <th>设备地址</th>
+                    <th>设备状态</th>
+                    <th>设备操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ device.device_id }}</td>
+                    <td>杭州</td>
+                    {% if device.device_state == '1' %}
+                        <td>在线</td>
+                    {% else %}
+                        <td>离线</td>
+                    {% endif %}
+                    <td><a href="/do/{{ device.device_id }}">点击操作</a></td>
+                </tr>
+                </tbody>
+            </table>
+         </div>
+    </div>
+{% endblock %}

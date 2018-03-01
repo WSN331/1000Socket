@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}权限{% endblock %}
+
+{% block head %}
+    <link href="{% static 'css/control.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title3 %}active{% endblock %}
+
+{% block content %}
+    <div class="main">
+        <h3 class="admin_title" style="margin-top: 200px">用户管理</h3>
+        <div class="admin_table">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>账号</th>
+                    <th>姓名</th>
+                    <th>角色</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td><button type="button" class="btn btn-danger">管理员</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td><button type="button" class="btn btn-success">普通用户</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td><button type="button" class="btn btn-success">普通用户</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
