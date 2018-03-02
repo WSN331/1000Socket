@@ -7,20 +7,19 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 import shit.helper.ShitReflectException;
-import shit.socket.ShitSocketServer;
 
 /**
- * 字符流
+ * 字符流的socket客户
  * @author Administrator
  *
  */
-public class StandardStringSocketClient extends StandardSocketClient {
+public class StandardStringSocketClient extends StandardSocketClient<StandardStringSocketServer> {
 
 	private String line;
 	
 	private BufferedReader br;
 	
-	public StandardStringSocketClient(Socket socket, ShitSocketServer server) {
+	public StandardStringSocketClient(Socket socket, StandardStringSocketServer server) {
 		super(socket, server);
 	}
 

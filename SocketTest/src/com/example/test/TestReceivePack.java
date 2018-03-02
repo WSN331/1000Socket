@@ -33,11 +33,14 @@ public class TestReceivePack {
 	}
 
 	@ReceiveAction
-	public void receive(ShitSocketClient socketClient) {
+	public void receive(ShitSocketClient<?> socketClient) {
+		socketClient.register("111");
 		System.out.println(this);
 		TestSendPack sendPack = new TestSendPack();
 		sendPack.setId("dsfs");
 		sendPack.setTime(new Date());
 		socketClient.sendPack(sendPack);
+		socketClient.sendPack("111", sendPack);
+		
 	}
 }

@@ -7,7 +7,8 @@ import org.junit.Test;
 import shit.helper.ShitReflectHelper;
 import shit.socket.ShitSocketServer;
 import shit.socket.context.ShitSocketClientContext;
-import shit.socket.core.StandardSocketServer;
+import shit.socket.core.StandardBytesSocketServer;
+import shit.socket.core.StandardStringSocketServer;
 import shit.socket.pack.parser.JSONPackParser;
 
 public class TestSocket {
@@ -18,12 +19,13 @@ public class TestSocket {
 	}
 	
 	public void test1() {
-		ShitSocketServer server = new StandardSocketServer(new ShitSocketClientContext(), "utf-8", 5000, new JSONPackParser("com.example.test"));
+		ShitSocketServer server = new StandardStringSocketServer(new ShitSocketClientContext(), "utf-8", 5000, new JSONPackParser("com.example.test"));
 		server.start();
 	}
 	
 	public void test2() {
-		// parser
+		ShitSocketServer server = new StandardBytesSocketServer(new ShitSocketClientContext(), "utf-8", 5000, new TestBytesPackParser("com.example.test"), 512);
+		server.start();
 	}
 	
 	@Test

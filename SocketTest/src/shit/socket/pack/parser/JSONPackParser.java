@@ -1,43 +1,26 @@
 package shit.socket.pack.parser;
 
-import java.util.List;
-
 import shit.helper.ShitJSONHelper;
-import shit.helper.ShitReflectHelper;
 import shit.helper.json.ShitJSONObject;
 import shit.helper.json.netsf.ShitJSONObjectByNetSf;
-import shit.socket.pack.PackParser;
-import shit.socket.pack.Receive;
 
-public class JSONPackParser implements PackParser {
-	
-	static{
+public class JSONPackParser extends BasePackParser {
+
+	static {
 		ShitJSONHelper.init("shit.helper.json.netsf.ShitJSONInitByNetSf");
 	}
-	
-	private String packageName;
 
 	public JSONPackParser(String packageName) {
-		super();
-		this.packageName = packageName;
+		super(packageName);
 	}
 
 	@Override
 	public Class<?> parseClass(String message) {
-		ShitJSONObject<?> jobj = parse(message);
-		List<Class<?>> clazzs = ShitReflectHelper.getClasses(packageName);
-		for (Class<?> clazz : clazzs) {
-			Receive receive = clazz.getAnnotation(Receive.class);
-			if (receive == null) {
-				continue;
-			}
-			String objKey = receive.objKey();
-			String objValue = receive.objValue();
-			if (objValue.equals(jobj.get(objKey))) {
-				return clazz;
-			}
+		if (message == null || message.equals("")) {
+			return null;
 		}
-		return null;
+		ShitJSONObject<?> jobj = parse(message);
+		return findClassInPackage(new JSONClassJudger(jobj));
 	}
 
 	@Override
@@ -52,14 +35,33 @@ public class JSONPackParser implements PackParser {
 
 	@Override
 	public Class<?> parseClass(byte[] data) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Object parseObject(Class<?> clazz, byte[] data) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	/**
+	 * JSON解析数据的类判断器
+	 * 
+	 * @author GongTengPangYi
+	 *
+	 */
+	protected class JSONClassJudger implements ClassJudger {
+
+		private ShitJSONObject<?> jobj;
+
+		public JSONClassJudger(ShitJSONObject<?> jobj) {
+			this.jobj = jobj;
+		}
+
+		@Override
+		public boolean isThisClass(String objKey, String objValue) {
+			return objValue != null && objValue.equals(jobj.get(objKey));
+		}
+
 	}
 
 }

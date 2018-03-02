@@ -7,29 +7,37 @@ import java.io.InputStream;
 import java.net.Socket;
 
 import shit.helper.ShitReflectException;
-import shit.socket.ShitSocketServer;
 
-public class StandardBytesSocketClient extends StandardSocketClient {
+/**
+ * 基于字节流的socket客户端
+ * 
+ * @author GongTengPangYi
+ *
+ */
+public class StandardBytesSocketClient extends StandardSocketClient<StandardBytesSocketServer> {
 
 	private DataInputStream dis;
-	
-	public StandardBytesSocketClient(Socket socket, ShitSocketServer server) {
+
+	private int maxLength = 1024;
+
+	public StandardBytesSocketClient(Socket socket, StandardBytesSocketServer server) {
 		super(socket, server);
+		maxLength = server.getMaxLength();
 	}
 
 	@Override
 	public void initInputStream(InputStream inputStream) {
-        dis = new DataInputStream(new BufferedInputStream(inputStream));
+		dis = new DataInputStream(new BufferedInputStream(inputStream));
 	}
 
 	@Override
 	protected void runInternal() {
-		byte[] bytes = new byte[1024];
-        try {
+		byte[] bytes = new byte[maxLength];
+		try {
 			while (dis.read(bytes) != -1) {
-			    if (dis.available() == 0) { 
-			        doSomething(bytes);
-			    }
+				if (dis.available() == 0) {
+					doSomething(bytes);
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

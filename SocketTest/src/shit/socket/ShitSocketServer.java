@@ -10,9 +10,6 @@ import shit.socket.pack.PackParser;
  *
  */
 public abstract class ShitSocketServer extends RunnableLifeCycle {
-	
-	public static final String IO_TYPE_STRING = "io_type_string";
-	public static final String IO_TYPE_BYTES = "io_type_bytes";
 
 	/**
 	 * SocketClient总容器
@@ -28,26 +25,12 @@ public abstract class ShitSocketServer extends RunnableLifeCycle {
 	 * 解析器
 	 */
 	protected PackParser parser;
-	
-	protected String ioType = IO_TYPE_STRING;
-	
+		
 	public ShitSocketServer(ShitSocketClientContext shitSocketClientContext, String charset, PackParser parser) {
 		super();
 		this.shitSocketClientContext = shitSocketClientContext;
 		this.charset = charset;
 		this.parser = parser;
-	}
-
-	public ShitSocketServer(ShitSocketClientContext shitSocketClientContext, String ioType, String charset, PackParser parser) {
-		super();
-		this.shitSocketClientContext = shitSocketClientContext;
-		this.charset = charset;
-		this.parser = parser;
-		this.ioType = ioType;
-	}
-	
-	public void setIoType(String ioType) {
-		this.ioType = ioType;
 	}
 
 	public String getCharset() {

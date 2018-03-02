@@ -12,6 +12,7 @@ import shit.socket.ShitSocketContext;
  * @author GongTengPangYi
  *
  */
+@SuppressWarnings("rawtypes")
 public class ShitSocketClientContext implements ShitSocketContext<ShitSocketClient> {
 
 	Map<String, ShitSocketClient> clientMap;

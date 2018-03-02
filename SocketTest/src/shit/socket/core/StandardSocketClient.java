@@ -7,14 +7,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 
 import shit.socket.ShitSocketClient;
-import shit.socket.ShitSocketServer;
 
 /**
  * 套接字的客户端的基本实现
  * @author GongTengPangYi
  *
  */
-public abstract class StandardSocketClient extends ShitSocketClient {
+public abstract class StandardSocketClient<T extends StandardSocketServer> extends ShitSocketClient<T> {
 	
 	/**
 	 * 套接字
@@ -28,7 +27,7 @@ public abstract class StandardSocketClient extends ShitSocketClient {
 	
 	protected ReceiveAction receiveAction;
 	
-	public StandardSocketClient(Socket socket, ShitSocketServer server) {
+	public StandardSocketClient(Socket socket, T server) {
 		super(server);
 		this.socket = socket;
 		receiveAction = new ReceiveAction(server.getParser());

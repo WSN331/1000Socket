@@ -1,15 +1,16 @@
 package shit.socket;
 
+import shit.socket.context.ShitSocketClientContext;
 import shit.socket.core.SendHelper;
 
-public abstract class ShitSocketClient extends RunnableLifeCycle {
+public abstract class ShitSocketClient<T extends ShitSocketServer> extends RunnableLifeCycle {
 
 	/**
 	 * SocketClient总容器
 	 */
-	protected ShitSocketServer shitSocketServer;
+	protected T shitSocketServer;
 
-	public ShitSocketClient(ShitSocketServer shitSocketServer) {
+	public ShitSocketClient(T shitSocketServer) {
 		super();
 		this.shitSocketServer = shitSocketServer;
 	}
@@ -39,7 +40,7 @@ public abstract class ShitSocketClient extends RunnableLifeCycle {
 	 *            发送的信息
 	 */
 	public void send(String key, byte[] data) {
-		ShitSocketClient client = shitSocketServer.getShitSocketContext().get(key);
+		ShitSocketClient<?> client = shitSocketServer.getShitSocketContext().get(key);
 		if (client != null) {
 			client.send(data);
 		}
@@ -54,7 +55,7 @@ public abstract class ShitSocketClient extends RunnableLifeCycle {
 	 *            发送的信息
 	 */
 	public void send(String key, String message) {
-		ShitSocketClient client = shitSocketServer.getShitSocketContext().get(key);
+		ShitSocketClient<?> client = shitSocketServer.getShitSocketContext().get(key);
 		if (client != null) {
 			client.send(message);
 		}
@@ -95,6 +96,18 @@ public abstract class ShitSocketClient extends RunnableLifeCycle {
 			send(key, (String)obj);
 		} else {
 			send(key, (byte[])obj);
+		}
+	}
+	
+	/**
+	 * 注册到容器中以方便其他链接访问
+	 */
+	public void register(String key) {
+		if (shitSocketServer != null) {
+			ShitSocketClientContext context = shitSocketServer.getShitSocketContext();
+			if (context != null) {
+				context.set(key, this);
+			}
 		}
 	}
 

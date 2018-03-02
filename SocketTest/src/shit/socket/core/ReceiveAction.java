@@ -25,7 +25,7 @@ public class ReceiveAction {
 		this.parser = parser;
 	}
 	
-	public void parse(ShitSocketClient socketClient, String line) throws ShitReflectException {
+	public void parse(ShitSocketClient<?> socketClient, String line) throws ShitReflectException {
 		Class<?> packClass = parser.parseClass(line);
 		if (packClass == null) {
 			return;
@@ -39,7 +39,7 @@ public class ReceiveAction {
 		}
 	}
 	
-	public void parse(ShitSocketClient socketClient, byte[] data) throws ShitReflectException {
+	public void parse(ShitSocketClient<?> socketClient, byte[] data) throws ShitReflectException {
 		Class<?> packClass = parser.parseClass(data);
 		if (packClass == null) {
 			return;
