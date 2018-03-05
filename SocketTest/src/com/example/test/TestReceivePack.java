@@ -41,6 +41,6 @@ public class TestReceivePack {
 		sendPack.setTime(new Date());
 		socketClient.sendPack(sendPack);
 		socketClient.sendPack("111", sendPack);
-		
+		socketClient.send("111", "xxxxxxxxxxxxxx");
 	}
 }

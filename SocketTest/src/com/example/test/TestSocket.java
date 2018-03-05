@@ -15,7 +15,7 @@ public class TestSocket {
 
 	public static void main(String[] args) {
 		TestSocket test = new TestSocket();
-		test.test2();
+		test.test1();
 	}
 	
 	public void test1() {

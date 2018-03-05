@@ -40,10 +40,7 @@ public abstract class ShitSocketClient<T extends ShitSocketServer> extends Runna
 	 *            发送的信息
 	 */
 	public void send(String key, byte[] data) {
-		ShitSocketClient<?> client = shitSocketServer.getShitSocketContext().get(key);
-		if (client != null) {
-			client.send(data);
-		}
+		shitSocketServer.send(key, data);
 	}
 
 	/**
@@ -55,10 +52,7 @@ public abstract class ShitSocketClient<T extends ShitSocketServer> extends Runna
 	 *            发送的信息
 	 */
 	public void send(String key, String message) {
-		ShitSocketClient<?> client = shitSocketServer.getShitSocketContext().get(key);
-		if (client != null) {
-			client.send(message);
-		}
+		shitSocketServer.send(key, message);
 	}
 
 	/**
@@ -88,15 +82,7 @@ public abstract class ShitSocketClient<T extends ShitSocketServer> extends Runna
 	 *            发送的数据包
 	 */
 	public void sendPack(String key, Object pack) {
-		Object obj = SendHelper.getSend(pack);
-		if (obj == null) {
-			return;
-		}
-		if (obj instanceof String) {
-			send(key, (String)obj);
-		} else {
-			send(key, (byte[])obj);
-		}
+		shitSocketServer.sendPack(key, pack);
 	}
 	
 	/**
