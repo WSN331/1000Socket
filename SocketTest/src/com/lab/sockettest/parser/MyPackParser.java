@@ -42,7 +42,7 @@ public class MyPackParser extends BaseBytesPackParser {
 			}
 			pack.setBody(body);
 			
-			//TODO:
+			return pack;
 			
 		} catch (ShitReflectException e) {
 			e.printStackTrace();

@@ -1,5 +1,7 @@
 package com.lab.sockettest.receive;
 
+import shit.socket.pack.ReceiveAction;
+
 public class RegisterPack extends BaseReceivePack {
 
 	/**
@@ -9,10 +11,15 @@ public class RegisterPack extends BaseReceivePack {
 
 	@Override
 	public void setBody(byte[] body) {
-		// TODO Auto-generated method stub
-		
+		for (byte b : body) {
+			System.out.println(b);
+		}
 	}
 
 	
+	@ReceiveAction
+	public void receiveAction() {
+		
+	}
 	
 }
