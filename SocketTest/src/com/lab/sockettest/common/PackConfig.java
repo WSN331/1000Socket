@@ -19,8 +19,22 @@ public class PackConfig {
 		{
 			Map<Byte, Class<? extends BaseReceivePack>> childFunction = new HashMap<>();
 			childFunction.put((byte)01, RegisterPack.class);
+			childFunction.put((byte)02, RegisterPack.class);
+			childFunction.put((byte)04, RegisterPack.class);
+			childFunction.put((byte)05, RegisterPack.class);
+			childFunction.put((byte)06, RegisterPack.class);
 			
 			mainFunction.put((byte)01, childFunction);
+		}
+		
+		{
+			Map<Byte, Class<? extends BaseReceivePack>> childFunction = new HashMap<>();
+			childFunction.put((byte)01, RegisterPack.class);
+			childFunction.put((byte)02, RegisterPack.class);
+			childFunction.put((byte)03, RegisterPack.class);
+			childFunction.put((byte)04, RegisterPack.class);
+			
+			mainFunction.put((byte)05, childFunction);
 		}
 	}
 	
@@ -31,9 +45,9 @@ public class PackConfig {
 	 * @return class
 	 */
 	public static Class<? extends BaseReceivePack> getFunction(byte mainCode, byte childCode) {
-		Map<Byte, Class<? extends BaseReceivePack>> childFunction = mainFunction.get(mainFunction);
+		Map<Byte, Class<? extends BaseReceivePack>> childFunction = mainFunction.get(mainCode);
 		if (childFunction != null) {
-			return childFunction.get(childFunction);
+			return childFunction.get(childCode);
 		}
 		return null;
 	}

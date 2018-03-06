@@ -16,6 +16,7 @@ public class MyPackParser extends BaseBytesPackParser {
 	@Override
 	public Class<?> parseClass(byte[] data) {
 		if (data.length > 16) {
+			System.out.print("func:" + data[4] + " " + data[5] + ";  ");
 			Class<? extends BaseReceivePack> packClass = PackConfig.getFunction(data[4], data[5]);
 			return packClass;
 		}
