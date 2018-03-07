@@ -1,4 +1,4 @@
-package com.lab.sockettest.receive;
+package com.lab.sockettest.socket.receive;
 
 import java.io.Serializable;
 
@@ -17,12 +17,12 @@ public abstract class BaseReceivePack implements Serializable {
 	/**
 	 * 流水号， 第6-9位
 	 */
-	private byte[] id;
+	protected byte[] id;
 	
 	/**
 	 * 包体长度， 第10-11位
 	 */
-	private int length;
+	protected int length;
 
 	public byte[] getId() {
 		return id;

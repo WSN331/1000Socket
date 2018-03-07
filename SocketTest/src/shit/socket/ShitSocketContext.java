@@ -1,5 +1,7 @@
 package shit.socket;
 
+import java.util.Set;
+
 /**
  * 容器类接口，整个Socket连接的套接字组需要存放在容器中
  * 
@@ -25,4 +27,10 @@ public interface ShitSocketContext<T extends LifeCycle> extends LifeCycle {
 	 * @param value
 	 */
 	public void set(String key, T value);
+	
+	/**
+	 * 获取键集合
+	 * @return
+	 */
+	public Set<String> keySet();
 }

@@ -2,6 +2,7 @@ package shit.socket.context;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import shit.socket.ShitSocketClient;
 import shit.socket.ShitSocketContext;
@@ -65,6 +66,11 @@ public class ShitSocketClientContext implements ShitSocketContext<ShitSocketClie
 		if (clientMap != null) {
 			clientMap.put(key, value);
 		}
+	}
+
+	@Override
+	public Set<String> keySet() {
+		return clientMap.keySet();
 	}
 
 }

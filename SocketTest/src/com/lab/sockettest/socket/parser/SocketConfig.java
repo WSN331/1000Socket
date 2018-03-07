@@ -1,38 +1,38 @@
-package com.lab.sockettest.common;
+package com.lab.sockettest.socket.parser;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.lab.sockettest.receive.BaseReceivePack;
-import com.lab.sockettest.receive.RegisterPack;
+import com.lab.sockettest.socket.receive.BaseReceivePack;
+import com.lab.sockettest.socket.receive.RegisterRequest;
 
 /**
  * 数据包的配置
  * @author GongTengPangYi
  *
  */
-public class PackConfig {
+public class SocketConfig {
 
 	private static Map<Byte, Map<Byte, Class<? extends BaseReceivePack>>> mainFunction = new HashMap<>();
 	
 	static {
 		{
 			Map<Byte, Class<? extends BaseReceivePack>> childFunction = new HashMap<>();
-			childFunction.put((byte)01, RegisterPack.class);
-			childFunction.put((byte)02, RegisterPack.class);
-			childFunction.put((byte)04, RegisterPack.class);
-			childFunction.put((byte)05, RegisterPack.class);
-			childFunction.put((byte)06, RegisterPack.class);
+			childFunction.put((byte)01, RegisterRequest.class);
+			childFunction.put((byte)02, RegisterRequest.class);
+			childFunction.put((byte)04, RegisterRequest.class);
+			childFunction.put((byte)05, RegisterRequest.class);
+			childFunction.put((byte)06, RegisterRequest.class);
 			
 			mainFunction.put((byte)01, childFunction);
 		}
 		
 		{
 			Map<Byte, Class<? extends BaseReceivePack>> childFunction = new HashMap<>();
-			childFunction.put((byte)01, RegisterPack.class);
-			childFunction.put((byte)02, RegisterPack.class);
-			childFunction.put((byte)03, RegisterPack.class);
-			childFunction.put((byte)04, RegisterPack.class);
+			childFunction.put((byte)01, RegisterRequest.class);
+			childFunction.put((byte)02, RegisterRequest.class);
+			childFunction.put((byte)03, RegisterRequest.class);
+			childFunction.put((byte)04, RegisterRequest.class);
 			
 			mainFunction.put((byte)05, childFunction);
 		}

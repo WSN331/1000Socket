@@ -1,10 +1,10 @@
-package com;
+package com.lab.sockettest.socket;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import com.lab.sockettest.parser.MyPackParser;
+import com.lab.sockettest.socket.parser.MyPackParser;
 
 import shit.socket.ShitSocketServer;
 import shit.socket.context.ShitSocketClientContext;
@@ -17,27 +17,31 @@ import shit.socket.core.StandardBytesSocketServer;
 @WebListener
 public class SocketStarterListener implements ServletContextListener {
 
-	private ShitSocketServer server;
+	private static ShitSocketServer terminalServer;
 	
-    /**
+    public static ShitSocketServer getTerminalServer() {
+		return terminalServer;
+	}
+
+	/**
      * Default constructor. 
      */
     public SocketStarterListener() {
-    	server = new StandardBytesSocketServer(new ShitSocketClientContext(), "utf-8", 5000, new MyPackParser("com.lab.sockettest"), 1024);
+    	terminalServer = new StandardBytesSocketServer(new ShitSocketClientContext(), "utf-8", 5000, new MyPackParser("com.lab.sockettest"), 1024);
     }
 
 	/**
      * @see ServletContextListener#contextDestroyed(ServletContextEvent)
      */
     public void contextDestroyed(ServletContextEvent arg0)  { 
-        server.stop();
+        terminalServer.stop();
     }
 
 	/**
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent arg0)  { 
-		server.start();
+		terminalServer.start();
     }
 	
 }

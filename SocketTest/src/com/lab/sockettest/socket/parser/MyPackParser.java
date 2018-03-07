@@ -1,7 +1,6 @@
-package com.lab.sockettest.parser;
+package com.lab.sockettest.socket.parser;
 
-import com.lab.sockettest.common.PackConfig;
-import com.lab.sockettest.receive.BaseReceivePack;
+import com.lab.sockettest.socket.receive.BaseReceivePack;
 
 import shit.helper.ShitReflectException;
 import shit.helper.ShitReflectHelper;
@@ -17,7 +16,7 @@ public class MyPackParser extends BaseBytesPackParser {
 	public Class<?> parseClass(byte[] data) {
 		if (data.length > 16) {
 			System.out.print("func:" + data[4] + " " + data[5] + ";  ");
-			Class<? extends BaseReceivePack> packClass = PackConfig.getFunction(data[4], data[5]);
+			Class<? extends BaseReceivePack> packClass = SocketConfig.getFunction(data[4], data[5]);
 			return packClass;
 		}
 		return null;
@@ -38,8 +37,11 @@ public class MyPackParser extends BaseBytesPackParser {
 			pack.setLength(length);
 			
 			byte[] body = new byte[length];
+			System.out.println("body.length = " + body.length);
 			for (int i=0; i<length; i++) {
 				body[i] = data[i+12];
+				System.out.print(body[i]);
+				System.out.print(" ");
 			}
 			pack.setBody(body);
 			
