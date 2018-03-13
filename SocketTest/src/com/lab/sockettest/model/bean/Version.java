@@ -19,6 +19,9 @@ public class Version extends MyEntity{
 	
 	@ShitDBField(name = "C_COUNT")
 	private Integer count;
+	
+	@ShitDBField(name = "C_LOCATION")
+	private String location;
 
 	public String getVersion() {
 		return version;
@@ -42,6 +45,14 @@ public class Version extends MyEntity{
 
 	public void setCount(Integer count) {
 		this.count = count;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	
 	
