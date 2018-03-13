@@ -1,21 +1,19 @@
 package com.lab.sockettest.model.bean;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import shit.db.table.ShitDBField;
 import shit.db.table.ShitDBTable;
 
 @ShitDBTable(name = "T_DEVICE", primaryKey = "id")
-public class Device implements Serializable {
+public class Device extends MyEntity {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5204181930534502325L;
 
-	@ShitDBField(name = "C_ID", length = 11)
-	private Integer id;
+	
 	@ShitDBField(name = "C_DEVICE_ID", length = 32)
 	private String deviceId;
 	@ShitDBField(name = "C_VERSION", length = 32)
@@ -33,13 +31,7 @@ public class Device implements Serializable {
 	@ShitDBField(name = "C_LAST_HEART")
 	private Date lastHeartTime;
 
-	public Integer getId() {
-		return id;
-	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getDeviceId() {
 		return deviceId;

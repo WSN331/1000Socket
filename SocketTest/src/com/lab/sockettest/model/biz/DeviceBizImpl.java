@@ -9,73 +9,16 @@ import com.lab.sockettest.model.bean.Device;
 
 import shit.db.ShitDBSession;
 import shit.db.exception.ShitDBConfigureException;
-import shit.db.exception.ShitDBExecuteException;
 import shit.db.exception.ShitDBJDBCException;
 import shit.db.exception.ShitDBTranslateException;
 import shit.db.exception.ShitDBWrongControlException;
 
 
-public class DeviceBizImpl implements DeviceBiz {
+public class DeviceBizImpl extends BaseBizImpl<Device> implements DeviceBiz {
 	
-	ShitDBSession dbSession;
 
 	public DeviceBizImpl(ShitDBSession dbSession) {
-		super();
-		this.dbSession = dbSession;
-	}
-
-	@Override
-	public Device save(Device device) {
-		try {
-			return (Device) dbSession.save(device);
-		} catch (ShitDBExecuteException e) {
-			e.printStackTrace();
-		} catch (ShitDBConfigureException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public Device update(Device device) {
-		try {
-			return (Device) dbSession.update(device);
-		} catch (ShitDBExecuteException e) {
-			e.printStackTrace();
-		} catch (ShitDBConfigureException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public boolean delete(Device device) {
-		try {
-			dbSession.delete(device);
-			return true;
-		} catch (ShitDBExecuteException e) {
-			e.printStackTrace();
-		} catch (ShitDBConfigureException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Device> findAll() {
-		try {
-			return (List<Device>) dbSession.findAll(Device.class);
-		} catch (ShitDBJDBCException e) {
-			e.printStackTrace();
-		} catch (ShitDBWrongControlException e) {
-			e.printStackTrace();
-		} catch (ShitDBConfigureException e) {
-			e.printStackTrace();
-		} catch (ShitDBTranslateException e) {
-			e.printStackTrace();
-		}
-		return null;
+		super(dbSession, Device.class);
 	}
 
 	@SuppressWarnings("unchecked")

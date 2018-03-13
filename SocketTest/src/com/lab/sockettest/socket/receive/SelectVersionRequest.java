@@ -1,5 +1,7 @@
 package com.lab.sockettest.socket.receive;
 
+import com.lab.sockettest.console.util.BizUtil;
+import com.lab.sockettest.model.bean.Version;
 import com.lab.sockettest.socket.send.SelectVersionResponse;
 
 import shit.socket.core.StandardBytesSocketClient;
@@ -24,7 +26,10 @@ public class SelectVersionRequest extends BaseReceivePack {
 		response.setId(id);
 		response.setFuncCode(new byte[]{(byte)01, (byte)02});
 		//TODO
-		response.setVersion("xxxxx");
+		Version version = BizUtil.getVersionBiz().findLastVersion();
+		if (version != null) {	
+			response.setVersion(version.getVersion());
+		}
 		socketClient.sendPack(response);
 
 	}

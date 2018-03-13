@@ -1,6 +1,8 @@
 package com.lab.sockettest.socket.receive;
 
+import com.lab.sockettest.console.util.BizUtil;
 import com.lab.sockettest.console.util.BytesUtil;
+import com.lab.sockettest.model.bean.Version;
 import com.lab.sockettest.socket.send.UpdateVersionResponse;
 
 import shit.socket.core.StandardBytesSocketClient;
@@ -46,9 +48,14 @@ public class UpdateVersionRequest extends BaseReceivePack {
 		response.setId(id);
 		response.setFuncCode(new byte[]{(byte)01, (byte)02});
 		//TODO
-		response.setResult(1);
-		response.setSize(16);;
-		response.setCount(4);
+		Version version = BizUtil.getVersionBiz().findLastVersion();
+		if (version != null) {			
+			response.setResult(1);
+			response.setSize(version.getSize());;
+			response.setCount(version.getCount());
+		} else {
+			response.setResult(0);
+		}
 		socketClient.sendPack(response);
 
 	}
