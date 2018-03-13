@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.websocket.Session;
 
-import com.lab.sockettest.console.API;
+import com.lab.sockettest.console.util.BizUtil;
 
 import net.sf.json.JSONArray;
 
@@ -23,9 +23,8 @@ public class LoginWSRequest extends BaseWSRequest {
 	@Override
 	public void action(Session session) {
 		System.out.println("login : " + name);
-		
 		try {
-			session.getBasicRemote().sendText(JSONArray.fromObject(API.terminalList()).toString());
+			session.getBasicRemote().sendText(JSONArray.fromObject(BizUtil.getDeviceBiz().findAll()).toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

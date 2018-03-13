@@ -23,8 +23,8 @@ public interface LifeCycle {
 	 */
 	public void init();
 	
-	/**
-	 * 暂停
-	 */
-	public void stop();
+//	/**
+//	 * 暂停
+//	 */
+//	public void stop();
 }

@@ -87,13 +87,12 @@ public abstract class StandardSocketClient<T extends StandardSocketServer> exten
 	}
 
 	@Override
-	protected void stopInternal() {
-
-	}
-
-	@Override
 	protected void closeInternal() {
-		
+		try {
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

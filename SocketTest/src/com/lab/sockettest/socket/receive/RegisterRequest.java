@@ -3,7 +3,9 @@ package com.lab.sockettest.socket.receive;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.lab.sockettest.console.util.BizUtil;
 import com.lab.sockettest.console.util.BytesUtil;
+import com.lab.sockettest.model.bean.Device;
 import com.lab.sockettest.socket.send.RegisterResponse;
 
 import shit.socket.core.StandardBytesSocketClient;
@@ -56,6 +58,11 @@ public class RegisterRequest extends BaseReceivePack {
 		this.createTime = createTime;
 	}
 	
+	@Override
+	public String toString() {
+		return "RegisterRequest [deviceId=" + deviceId + ", deviceType=" + deviceType + ", deviceVersion="
+				+ deviceVersion + ", createTime=" + createTime + "]";
+	}
 
 	@Override
 	public void setBody(byte[] body) {
@@ -69,17 +76,31 @@ public class RegisterRequest extends BaseReceivePack {
 		setDeviceVersion(BytesUtil.bytesToString(version));
 		setCreateTime(BytesUtil.bytesToString(time));
 		
+		System.out.println(toString());
 	}
 
 	
 	@ReceiveAction
 	public void receiveAction(StandardBytesSocketClient socketClient) {
 		socketClient.register(deviceId);
+		SimpleDateFormat format = new SimpleDateFormat("yyyymmddmmhhss");
+		try {
+			Device device = BizUtil.getDeviceBiz().findByDeviceId(deviceId);
+			if (device == null) {				
+				device = new Device();
+				device.setCreateTime(new Date());
+				device.setDeviceId(deviceId);
+				device.setType(deviceType);
+				device.setVersion(deviceVersion);
+				BizUtil.getDeviceBiz().save(device);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		RegisterResponse response = new RegisterResponse();
 		response.setId(id);
 		response.setFuncCode(new byte[]{(byte)01, (byte)01});
 		response.setResult(1);
-		SimpleDateFormat format = new SimpleDateFormat("yyyymmddhhmmss");
 		response.setTime(format.format(new Date()));
 		socketClient.sendPack(response);
 	}

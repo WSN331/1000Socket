@@ -4,7 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.lab.sockettest.socket.receive.BaseReceivePack;
+import com.lab.sockettest.socket.receive.HeartRequest;
 import com.lab.sockettest.socket.receive.RegisterRequest;
+import com.lab.sockettest.socket.receive.RestartResponse;
+import com.lab.sockettest.socket.receive.SwitchControlResponse;
+import com.lab.sockettest.socket.receive.SwitchStateResponse;
 
 /**
  * 数据包的配置
@@ -19,10 +23,10 @@ public class SocketConfig {
 		{
 			Map<Byte, Class<? extends BaseReceivePack>> childFunction = new HashMap<>();
 			childFunction.put((byte)01, RegisterRequest.class);
-			childFunction.put((byte)02, RegisterRequest.class);
-			childFunction.put((byte)04, RegisterRequest.class);
-			childFunction.put((byte)05, RegisterRequest.class);
-			childFunction.put((byte)06, RegisterRequest.class);
+			childFunction.put((byte)02, HeartRequest.class);
+			childFunction.put((byte)04, RestartResponse.class);
+			childFunction.put((byte)05, SwitchControlResponse.class);
+			childFunction.put((byte)06, SwitchStateResponse.class);
 			
 			mainFunction.put((byte)01, childFunction);
 		}

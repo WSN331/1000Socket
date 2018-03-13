@@ -46,9 +46,9 @@ public abstract class BaseSendPack implements Serializable {
 		BytesUtil.addBytes(result, 12, body());
 		
 		result[result.length-1] = (byte)74;
-		result[result.length-1] = (byte)74;
-		result[result.length-1] = (byte)72;
-		result[result.length-1] = (byte)72;
+		result[result.length-2] = (byte)74;
+		result[result.length-3] = (byte)72;
+		result[result.length-4] = (byte)72;
 		
 		printResult(result);
 		
@@ -56,10 +56,12 @@ public abstract class BaseSendPack implements Serializable {
 	}
 	
 	private void printResult(byte[] bs) {
+		System.out.print("send: ");
 		for (byte b : bs) {
 			System.out.print(b);
 			System.out.print(" ");
 		}
+		System.out.println("");
 	}
 	
 	/**

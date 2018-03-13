@@ -9,10 +9,16 @@ public abstract class ShitSocketClient<T extends ShitSocketServer> extends Runna
 	 * SocketClient总容器
 	 */
 	protected T shitSocketServer;
+	
+	protected String key;
 
 	public ShitSocketClient(T shitSocketServer) {
 		super();
 		this.shitSocketServer = shitSocketServer;
+	}
+
+	public String getKey() {
+		return key;
 	}
 
 	/**
@@ -93,6 +99,7 @@ public abstract class ShitSocketClient<T extends ShitSocketServer> extends Runna
 			ShitSocketClientContext context = shitSocketServer.getShitSocketContext();
 			if (context != null) {
 				context.set(key, this);
+				this.key = key;
 			}
 		}
 	}

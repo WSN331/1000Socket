@@ -6,6 +6,11 @@ public abstract class RunnableLifeCycle implements LifeCycle, Runnable {
 	 * 线程
 	 */
 	Thread threadSelf;
+	
+	/**
+	 * 
+	 */
+	boolean inited = false;
 
 	/**
 	 * 启停标志
@@ -14,7 +19,6 @@ public abstract class RunnableLifeCycle implements LifeCycle, Runnable {
 	
 	public RunnableLifeCycle() {
 		super();
-		init();
 	}
 
 	@Override
@@ -26,12 +30,16 @@ public abstract class RunnableLifeCycle implements LifeCycle, Runnable {
 
 	@Override
 	public void close() {
+		inited = false;
 		flag = false;
 		closeInternal();
 	}
 
 	@Override
 	public void start() {
+		if (!inited) {
+			init();
+		}
 		flag = true;
 		startInternal();
 		threadSelf.start();
@@ -41,17 +49,10 @@ public abstract class RunnableLifeCycle implements LifeCycle, Runnable {
 	public void init() {
 		threadSelf = new Thread(this);
 		initInternal();
-	}
-
-	@Override
-	public void stop() {
-		flag = false;
-		stopInternal();
+		inited = true;
 	}
 
 	protected abstract void startInternal();
-
-	protected abstract void stopInternal();
 
 	protected abstract void closeInternal();
 

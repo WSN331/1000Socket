@@ -41,11 +41,13 @@ public class StandardBytesSocketClient extends StandardSocketClient<StandardByte
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+			close();
 		}
 	}
 
 	private void doSomething(byte[] data) {
-		System.out.println(data);
+		System.out.println("\n\n");
+		System.out.println(data + "**************************************************************************************************");
 		try {
 			receiveAction.parse(this, data);
 		} catch (ShitReflectException e) {

@@ -24,6 +24,7 @@ public abstract class StandardSocketServer extends ShitSocketServer {
 			String charset, int port, PackParser parser) {
 		super(shitSocketClientContext, charset, parser);
 		this.port = port;
+		init();
 	}
 
 
@@ -36,19 +37,17 @@ public abstract class StandardSocketServer extends ShitSocketServer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	
-	@Override
-	protected void stopInternal() {
-		super.stopInternal();
-		System.out.println("the server is stop");
-	}
 
+	}
 
 	@Override
 	protected void closeInternal() {
 		super.closeInternal();
+		try {
+			serverSocket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		System.out.println("the server is close");
 	}
 
@@ -58,6 +57,7 @@ public abstract class StandardSocketServer extends ShitSocketServer {
 		try {
 			Socket clientSocket = serverSocket.accept();
 			ShitSocketClient<?> client = initClient(clientSocket);
+			System.out.println("client connect....");
 //			if (ioType != null && ioType.equals(IO_TYPE_STRING)) {				
 //				client = new StandardStringSocketClient(clientSocket, this);
 //			} else {
@@ -74,7 +74,6 @@ public abstract class StandardSocketServer extends ShitSocketServer {
 
 	@Override
 	protected void initInternal() {
-		
 		
 	}
 

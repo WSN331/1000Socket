@@ -43,6 +43,7 @@ public class MyPackParser extends BaseBytesPackParser {
 				System.out.print(body[i]);
 				System.out.print(" ");
 			}
+			System.out.println("");
 			pack.setBody(body);
 			
 			return pack;

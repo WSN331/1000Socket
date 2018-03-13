@@ -44,16 +44,6 @@ public class ShitSocketClientContext implements ShitSocketContext<ShitSocketClie
 	}
 
 	@Override
-	public void stop() {
-		if (clientMap == null) {
-			return;
-		}
-		for (String key : clientMap.keySet()) {
-			clientMap.get(key).stop();
-		}
-	}
-
-	@Override
 	public ShitSocketClient get(String key) {
 		if (clientMap == null) {
 			return null;

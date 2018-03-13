@@ -58,10 +58,6 @@ public abstract class ShitSocketServer extends RunnableLifeCycle {
 		this.parser = parser;
 	}
 
-	@Override
-	protected void stopInternal() {
-		shitSocketClientContext.stop();
-	}
 
 	@Override
 	protected void closeInternal() {

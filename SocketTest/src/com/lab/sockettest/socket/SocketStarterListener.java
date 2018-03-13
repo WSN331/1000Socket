@@ -34,7 +34,7 @@ public class SocketStarterListener implements ServletContextListener {
      * @see ServletContextListener#contextDestroyed(ServletContextEvent)
      */
     public void contextDestroyed(ServletContextEvent arg0)  { 
-        terminalServer.stop();
+        terminalServer.close();
     }
 
 	/**
@@ -42,6 +42,7 @@ public class SocketStarterListener implements ServletContextListener {
      */
     public void contextInitialized(ServletContextEvent arg0)  { 
 		terminalServer.start();
+		
     }
 	
 }
