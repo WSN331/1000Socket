@@ -5,7 +5,9 @@ import java.util.Map;
 
 import com.lab.sockettest.websocket.WSParser;
 import com.lab.sockettest.websocket.WSRequest;
-import com.lab.sockettest.websocket.request.LoginWSRequest;
+import com.lab.sockettest.websocket.request.HomeWSRequest;
+import com.lab.sockettest.websocket.request.RestartWSRequest;
+import com.lab.sockettest.websocket.request.SwitchWSRequest;
 
 import net.sf.json.JSONObject;
 
@@ -25,7 +27,9 @@ public class JSONWSParser implements WSParser {
 	public static Map<String, Class<? extends WSRequest>> requestClassMap = new HashMap<>();
 	
 	static {
-		requestClassMap.put("login", LoginWSRequest.class);
+		requestClassMap.put("home", HomeWSRequest.class);
+		requestClassMap.put("switch", SwitchWSRequest.class);
+		requestClassMap.put("restart", RestartWSRequest.class);
 	}
 
 	@Override

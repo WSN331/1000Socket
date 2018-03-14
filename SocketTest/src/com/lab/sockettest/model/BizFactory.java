@@ -1,12 +1,11 @@
-package com.lab.sockettest.console.util;
+package com.lab.sockettest.model;
 
-import com.lab.sockettest.model.Dao;
 import com.lab.sockettest.model.biz.DeviceBiz;
 import com.lab.sockettest.model.biz.DeviceBizImpl;
 import com.lab.sockettest.model.biz.VersionBiz;
 import com.lab.sockettest.model.biz.VersionBizImpl;
 
-public class BizUtil {
+public class BizFactory {
 	
 	private static DeviceBiz deviceBiz;
 	private static VersionBiz versionBiz;

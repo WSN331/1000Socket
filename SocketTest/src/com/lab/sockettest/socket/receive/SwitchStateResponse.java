@@ -1,7 +1,11 @@
 package com.lab.sockettest.socket.receive;
 
-import com.lab.sockettest.console.util.BizUtil;
+import java.io.IOException;
+
+import com.lab.sockettest.model.BizFactory;
 import com.lab.sockettest.model.bean.Device;
+import com.lab.sockettest.websocket.WebEndPoint;
+import com.lab.sockettest.websocket.response.DeviceStateChangeResponse;
 
 import shit.socket.core.StandardBytesSocketClient;
 import shit.socket.pack.ReceiveAction;
@@ -61,11 +65,18 @@ public class SwitchStateResponse extends BaseReceivePack {
 	
 	@ReceiveAction
 	public void receiveAction(StandardBytesSocketClient socketClient) {
-		Device device = BizUtil.getDeviceBiz().findByDeviceId(socketClient.getKey());
+		Device device = BizFactory.getDeviceBiz().findByDeviceId(socketClient.getKey());
 		if (device != null) {
 			device.setSwitch1(switch1);
 			device.setSwitch2(switch2);
-			BizUtil.getDeviceBiz().update(device);
+			BizFactory.getDeviceBiz().update(device);
+			DeviceStateChangeResponse response = new DeviceStateChangeResponse();
+			response.setDevice(device);
+			try {
+				WebEndPoint.sendResponseToAll(response);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

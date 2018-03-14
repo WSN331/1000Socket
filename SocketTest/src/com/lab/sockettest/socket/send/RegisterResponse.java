@@ -11,6 +11,11 @@ public class RegisterResponse extends BaseSendPack {
 	 */
 	private static final long serialVersionUID = 1846524031296274844L;
 	
+	public RegisterResponse() {
+		super();
+		funcCode = new byte[] {01, 01};
+	}
+
 	private String time;
 	
 	/**

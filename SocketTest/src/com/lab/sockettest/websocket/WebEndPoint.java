@@ -33,6 +33,12 @@ public class WebEndPoint {
 		sessionMap.put(key, session);
 	}
 	
+	public static void sendMessage(Session session, String message) throws IOException {
+		if (session != null) {
+			session.getBasicRemote().sendText(message);
+		}
+	}
+	
 	/**
 	 * 发送消息
 	 * @param key 接收者

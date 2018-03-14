@@ -9,6 +9,11 @@ public class HeartResponse extends BaseSendPack {
 	 */
 	private static final long serialVersionUID = -3698977595014511293L;
 
+	public HeartResponse() {
+		super();
+		funcCode = new byte[] {01, 02};
+	}
+
 	@Override
 	protected byte[] body() {
 		byte[] b = new byte[0];

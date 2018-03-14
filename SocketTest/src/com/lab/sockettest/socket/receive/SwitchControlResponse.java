@@ -17,7 +17,6 @@ public class SwitchControlResponse extends BaseReceivePack {
 	@Override
 	public void setBody(byte[] body) {
 		result = (int) body[0];
-	
 	}
 	
 	@ReceiveAction

@@ -3,8 +3,8 @@ package com.lab.sockettest.socket.receive;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.lab.sockettest.console.util.BizUtil;
 import com.lab.sockettest.console.util.BytesUtil;
+import com.lab.sockettest.model.BizFactory;
 import com.lab.sockettest.model.bean.Device;
 import com.lab.sockettest.socket.send.RegisterResponse;
 
@@ -85,14 +85,14 @@ public class RegisterRequest extends BaseReceivePack {
 		socketClient.register(deviceId);
 		SimpleDateFormat format = new SimpleDateFormat("yyyymmddmmhhss");
 		try {
-			Device device = BizUtil.getDeviceBiz().findByDeviceId(deviceId);
+			Device device = BizFactory.getDeviceBiz().findByDeviceId(deviceId);
 			if (device == null) {				
 				device = new Device();
 				device.setCreateTime(new Date());
 				device.setDeviceId(deviceId);
 				device.setType(deviceType);
 				device.setVersion(deviceVersion);
-				BizUtil.getDeviceBiz().save(device);
+				BizFactory.getDeviceBiz().save(device);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

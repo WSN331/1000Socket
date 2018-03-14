@@ -9,6 +9,11 @@ public class SwitchControlRequest extends BaseSendPack {
 	 */
 	private static final long serialVersionUID = 8459956542854403870L;
 	
+	public SwitchControlRequest() {
+		super();
+		funcCode = new byte[] {01, 05};
+	}
+
 	private Integer switch1;
 	private Integer switch2;
 	private Integer switch3;

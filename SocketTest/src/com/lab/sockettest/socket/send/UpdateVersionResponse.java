@@ -11,6 +11,11 @@ public class UpdateVersionResponse extends BaseSendPack {
 	 */
 	private static final long serialVersionUID = -3698977595014511293L;
 	
+	public UpdateVersionResponse() {
+		super();
+		funcCode = new byte[] {05, 02};
+	}
+
 	private Integer result;
 
 	private Integer size;

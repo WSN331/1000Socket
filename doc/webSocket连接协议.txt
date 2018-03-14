@@ -1,0 +1,68 @@
+/SocketTest/web
+
+1.ÏÔÊ¾Ö÷Ò³
+¡¡¡¡ÍøÒ³·¢ËÍ£º
+¡¡¡¡{"method":"home","body":{}}
+¡¡¡¡½ÓÊÕ£º
+¡¡¡¡{
+¡¡¡¡	"sessionKey": "20180314120008771",
+¡¡¡¡	"deviceList": [{
+¡¡¡¡		"lastHeartTime": null,
+¡¡¡¡		"createTime": {
+¡¡¡¡			"date": 13,
+¡¡¡¡			"hours": 16,
+¡¡¡¡			"seconds": 22,
+¡¡¡¡			"month": 2,
+¡¡¡¡			"timezoneOffset": -480,
+¡¡¡¡			"year": 118,
+¡¡¡¡			"minutes": 44,
+¡¡¡¡			"time": 1520930662000,
+¡¡¡¡			"day": 2
+¡¡¡¡		},
+¡¡¡¡		"switch2": 0,
+¡¡¡¡		"switch1": 0,
+¡¡¡¡		"online": 0,
+¡¡¡¡		"id": 11,
+¡¡¡¡		"type": 768,
+¡¡¡¡		"deviceId": "dlkz000111111111",
+¡¡¡¡		"version": "YT-DZY01 0.01"
+¡¡¡¡	}]
+¡¡¡¡}
+¡¡¡¡
+2.¿ª¹Ø¿ØÖÆ
+¡¡¡¡ÍøÒ³·¢ËÍÇëÇó£º
+¡¡¡¡{"method":"switch","body":{"sessionKey":"20180314120008771", "deviceId": "dlkz000111111111", "switch1": 1, "switch2": 2}}
+¡¡¡¡ÎÞ½ÓÊÕ
+¡¡¡¡
+¡¡¡¡
+3.device×´Ì¬¸üÐÂ
+¡¡¡¡¡¡Server·¢ËÍ£º
+¡¡¡¡¡¡{
+¡¡¡¡¡¡	"device": {
+¡¡¡¡¡¡		"lastHeartTime": null,
+¡¡¡¡¡¡		"createTime": {
+¡¡¡¡¡¡			"date": 13,
+¡¡¡¡¡¡			"hours": 16,
+¡¡¡¡¡¡			"seconds": 22,
+¡¡¡¡¡¡			"month": 2,
+¡¡¡¡¡¡			"timezoneOffset": -480,
+¡¡¡¡¡¡			"year": 118,
+¡¡¡¡¡¡			"minutes": 44,
+¡¡¡¡¡¡			"time": 1520930662000,
+¡¡¡¡¡¡			"day": 2
+¡¡¡¡¡¡		},
+¡¡¡¡¡¡		"switch2": 1,
+¡¡¡¡¡¡		"switch1": 1,
+¡¡¡¡¡¡		"online": 0,
+¡¡¡¡¡¡		"id": 11,
+¡¡¡¡¡¡		"type": 768,
+¡¡¡¡¡¡		"deviceId": "dlkz000111111111",
+¡¡¡¡¡¡		"version": "YT-DZY01 0.01"
+¡¡¡¡¡¡	}
+¡¡¡¡¡¡}
+¡¡¡¡¡¡
+¡¡¡¡¡¡
+4.ÖØÆôÉè±¸
+¡¡¡¡¡¡ÍøÒ³·¢ËÍ£º
+¡¡¡¡¡¡{"method":"restart","body":{"sessionKey":"20180314120008771", "deviceId": "dlkz000111111111"}}
+¡¡¡¡¡¡ÎÞ·µ»Ø

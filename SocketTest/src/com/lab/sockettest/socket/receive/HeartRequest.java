@@ -2,7 +2,7 @@ package com.lab.sockettest.socket.receive;
 
 import java.util.Date;
 
-import com.lab.sockettest.console.util.BizUtil;
+import com.lab.sockettest.model.BizFactory;
 import com.lab.sockettest.model.bean.Device;
 import com.lab.sockettest.socket.send.HeartResponse;
 
@@ -23,10 +23,10 @@ public class HeartRequest extends BaseReceivePack {
 	
 	@ReceiveAction
 	public void receiveAction(StandardBytesSocketClient socketClient) {
-		Device device = BizUtil.getDeviceBiz().findByDeviceId(socketClient.getKey());
+		Device device = BizFactory.getDeviceBiz().findByDeviceId(socketClient.getKey());
 		if (device != null) {
 			device.setLastHeartTime(new Date());
-			BizUtil.getDeviceBiz().update(device);
+			BizFactory.getDeviceBiz().update(device);
 		}
 		HeartResponse response = new HeartResponse();
 		response.setId(id);

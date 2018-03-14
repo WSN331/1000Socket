@@ -1,6 +1,6 @@
 /*
 SQLyog v10.2 
-MySQL - 5.6.15 : Database - socket_test
+MySQL - 5.5.56-MariaDB : Database - socket_test
 *********************************************************************
 */
 
@@ -42,12 +42,13 @@ CREATE TABLE `t_version` (
   `c_version` varchar(32) DEFAULT NULL,
   `c_size` int(11) DEFAULT NULL,
   `c_count` int(11) DEFAULT NULL,
+  `c_location` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`c_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `t_version` */
 
-insert  into `t_version`(`c_id`,`c_version`,`c_size`,`c_count`) values (1,'xxx',12,4);
+insert  into `t_version`(`c_id`,`c_version`,`c_size`,`c_count`,`c_location`) values (1,'xxx',12,4,'/home/update');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

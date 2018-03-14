@@ -17,7 +17,7 @@ public class Dao {
 	static {
 		Properties props = new Properties();
 		props.setProperty("driverClass", "com.mysql.jdbc.Driver");
-		props.setProperty("jdbcUrl", "jdbc:mysql://localhost:3306/socket_test?characterEncoding=UTF-8");
+		props.setProperty("jdbcUrl", "jdbc:mysql://111.230.220.211:3306/socket_test?characterEncoding=UTF-8");
 		props.setProperty("user", "root");
 		props.setProperty("password", "123456");
 		ShitDBDataSource dataSource = new ShitDBC3P0DataSource();

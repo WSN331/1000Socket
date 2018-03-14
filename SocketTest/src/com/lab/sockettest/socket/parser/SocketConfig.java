@@ -4,11 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.lab.sockettest.socket.receive.BaseReceivePack;
+import com.lab.sockettest.socket.receive.DoUpdateRequest;
 import com.lab.sockettest.socket.receive.HeartRequest;
 import com.lab.sockettest.socket.receive.RegisterRequest;
 import com.lab.sockettest.socket.receive.RestartResponse;
+import com.lab.sockettest.socket.receive.SelectVersionRequest;
+import com.lab.sockettest.socket.receive.ServerReccordUpdateResponse;
 import com.lab.sockettest.socket.receive.SwitchControlResponse;
 import com.lab.sockettest.socket.receive.SwitchStateResponse;
+import com.lab.sockettest.socket.receive.UpdateVersionRequest;
 
 /**
  * 数据包的配置
@@ -33,10 +37,10 @@ public class SocketConfig {
 		
 		{
 			Map<Byte, Class<? extends BaseReceivePack>> childFunction = new HashMap<>();
-			childFunction.put((byte)01, RegisterRequest.class);
-			childFunction.put((byte)02, RegisterRequest.class);
-			childFunction.put((byte)03, RegisterRequest.class);
-			childFunction.put((byte)04, RegisterRequest.class);
+			childFunction.put((byte)01, SelectVersionRequest.class);
+			childFunction.put((byte)02, UpdateVersionRequest.class);
+			childFunction.put((byte)03, ServerReccordUpdateResponse.class);
+			childFunction.put((byte)04, DoUpdateRequest.class);
 			
 			mainFunction.put((byte)05, childFunction);
 		}

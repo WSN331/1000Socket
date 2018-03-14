@@ -11,6 +11,11 @@ public class SelectVersionResponse extends BaseSendPack {
 	 */
 	private static final long serialVersionUID = -3698977595014511293L;
 	
+	public SelectVersionResponse() {
+		super();
+		funcCode = new byte[] {05, 01};
+	}
+
 	private String version;
 
 	public String getVersion() {

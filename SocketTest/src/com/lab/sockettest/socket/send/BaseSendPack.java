@@ -15,6 +15,11 @@ public abstract class BaseSendPack implements Serializable {
 	
 	protected byte[] funcCode;	
 	
+	public BaseSendPack() {
+		super();
+		id = new byte[] {0,0,0,0};
+	}
+
 	public byte[] getId() {
 		return id;
 	}

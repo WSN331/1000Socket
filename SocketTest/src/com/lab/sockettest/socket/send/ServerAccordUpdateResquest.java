@@ -11,6 +11,11 @@ public class ServerAccordUpdateResquest extends BaseSendPack {
 	 */
 	private static final long serialVersionUID = -3698977595014511293L;
 	
+	public ServerAccordUpdateResquest() {
+		super();
+		funcCode = new byte[] {05, 03};
+	}
+
 	private Integer type;
 	
 	private String version;
