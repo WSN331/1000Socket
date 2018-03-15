@@ -12,6 +12,8 @@ import javax.websocket.server.ServerEndpoint;
 
 import com.lab.sockettest.websocket.parser.JSONWSParser;
 
+import net.sf.json.JSONObject;
+
 /**
  * 前端WebSocket交互，
  * @author GongTengPangYi
@@ -33,11 +35,13 @@ public class WebEndPoint {
 		sessionMap.put(key, session);
 	}
 	
-	public static void sendMessage(Session session, String message) throws IOException {
+	public static void sendJSON(Session session, JSONObject jobj, String method) throws IOException {
 		if (session != null) {
-			session.getBasicRemote().sendText(message);
+			jobj.put("method", method);
+			session.getBasicRemote().sendText(jobj.toString());
 		}
 	}
+	
 	
 	/**
 	 * 发送消息

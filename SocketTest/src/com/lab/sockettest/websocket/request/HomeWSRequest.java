@@ -26,7 +26,7 @@ public class HomeWSRequest extends BaseWSRequest {
 			JSONObject jobj = new JSONObject();
 			jobj.put("sessionKey", sessionKey);
 			jobj.put("deviceList", JSONArray.fromObject(BizFactory.getDeviceBiz().findAll()));
-			WebEndPoint.sendMessage(session, jobj.toString());
+			WebEndPoint.sendJSON(session, jobj, "home");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

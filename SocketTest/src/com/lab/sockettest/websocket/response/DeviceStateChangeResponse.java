@@ -4,6 +4,10 @@ import com.lab.sockettest.model.bean.Device;
 
 public class DeviceStateChangeResponse extends BaseWSResponse {
 
+	public DeviceStateChangeResponse() {
+		super("deviceStateChange");
+	}
+
 	private Device device;
 
 	public Device getDevice() {
