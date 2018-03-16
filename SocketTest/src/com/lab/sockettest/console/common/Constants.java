@@ -10,4 +10,6 @@ public class Constants {
     public static final String DATETIME_FORMAT_NOSPACE ="yyyyMMddHHmmss";
     public static final String DATETIME_FORMAT_MILL_NOSPACE = "yyyyMMddHHmmssSSS";
 	
+    
+    public static final int PAGE_SIZE = 10;
 }

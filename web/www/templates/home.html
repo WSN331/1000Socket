@@ -24,19 +24,13 @@
             <tr>
                 <th>序号</th>
                 <th>设备ID</th>
+                <th>版本</th>
                 <th>设备状态</th>
                 <th>设备操作</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>xxxxxxxx</td>
-                <td>在线</td>
-                <td>
-                    <a href="/do/{{ device.device_id }}">点击操作</a>
-                </td>
-            </tr>
+
             </tbody>
         </table>
     </div>
@@ -48,7 +42,7 @@
                 </a>
             </li>
 
-            <li class="item active"><a href=?page="{{ num }}">{{ num }}</a></li>
+            <li class="item active"><a href=?page=>{{ num }}</a></li>
             <li class="item"><a href="?page={{ num }}">{{ num }}</a></li>
 
             <li>

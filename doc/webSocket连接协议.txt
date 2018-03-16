@@ -53,7 +53,7 @@
 ¡¡¡¡¡¡		},
 ¡¡¡¡¡¡		"switch2": 1,
 ¡¡¡¡¡¡		"switch1": 1,
-¡¡¡¡¡¡		"online": 0,
+¡¡¡¡¡¡		"online": 0, 
 ¡¡¡¡¡¡		"id": 11,
 ¡¡¡¡¡¡		"type": 768,
 ¡¡¡¡¡¡		"deviceId": "dlkz000111111111",
@@ -66,3 +66,8 @@
 ¡¡¡¡¡¡ÍøÒ³·¢ËÍ£º
 ¡¡¡¡¡¡{"method":"restart","body":{"sessionKey":"20180314120008771", "deviceId": "dlkz000111111111"}}
 ¡¡¡¡¡¡ÎÞ·µ»Ø
+
+5.Éý¼¶Éè±¸
+¡¡¡¡¡¡ÍøÒ³·¢ËÍ£º
+¡¡¡¡¡¡¡¡{"method":"update","body":{"sessionKey":"20180314120008771", "deviceId": "dlkz000111111111"}}
+¡¡¡¡¡¡¡¡ÎÞ·µ»Ø

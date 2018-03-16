@@ -38,7 +38,7 @@ public class UpdateVersionRequest extends BaseReceivePack {
 	@Override
 	public void setBody(byte[] body) {
 		type = BytesUtil.bytesToInt(BytesUtil.subBytes(body, 0, 1));
-		version = BytesUtil.bytesToString(BytesUtil.subBytes(body, 1, 17));
+		version = BytesUtil.bytesToString(BytesUtil.subBytes(body, 1, 16));
 	}
 	
 	@ReceiveAction

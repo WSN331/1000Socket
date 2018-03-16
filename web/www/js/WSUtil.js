@@ -44,6 +44,10 @@
         }))
     };
 
+    window.onunload = function() {
+        webSocket.close();
+    }
+
     window.WSUtil = WSUtil;
 
 })(window);
