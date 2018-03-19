@@ -25,14 +25,39 @@ Home.prototype = {
     deviceList : [],
 
     /**
+     * 页码
+     */
+    page : 1,
+
+    /**
      * 界面初始化
      */
     init : function () {
         WSUtil.registerFunction("home", this.refreshList);
         WSUtil.registerFunction("deviceStateChange", this.deviceStateChange);
         WSUtil.connect(function () {
-            WSUtil.send("home", {})
+            console.log(window.location)
+            var url = window.location.href;
+            if (url.indexOf("page=") > -1) {
+                home.page = Number(url.substring(url.indexOf("page=") + 5));
+                if (isNaN(home.page)) {
+                    home.page = 1
+                }
+            }
+            if (url.indexOf("deviceId=") > -1) {
+                var deviceId = url.substring(url.indexOf("deviceId=") + 9);
+            } else {
+                var deviceId = ''
+            }
+
+            console.log(deviceId)
+            console.log(home.page)
+            WSUtil.send("home", {
+                pagerIndex : home.page,
+                deviceId : deviceId
+            })
         });
+
     },
 
     /**
@@ -43,6 +68,8 @@ Home.prototype = {
         var $table = $(".table");
         this.sessionKey = data["sessionKey"];
         home.deviceList = data['deviceList'];
+        console.log(data["count"]/10)
+        var pageCount = Math.ceil(data["count"] / 10);
         for (var i in home.deviceList) {
             var device = home.deviceList[i];
             var $tr = $("<tr>").attr("id", "device" + i).appendTo($table);
@@ -73,7 +100,19 @@ Home.prototype = {
             $restart.click(home.restart)
             $update.click(home.update);
         }
-
+        if (home.page > 1) {
+            $(".previous").find("a").attr("href", "?page=" + (home.page - 1)).html(home.page - 1);
+            $(".previous2").find("a").attr("href", "?page=" + (home.page - 1));
+        } else {
+            $(".previous").hide();
+        }
+        $(".active").find("a").html(home.page);
+        if (home.page < pageCount) {
+            $(".next").find("a").attr("href", "?page=" + (home.page + 1)).html(home.page + 1);
+            $(".next2").find("a").attr("href", "?page=" + (home.page + 1));
+        } else {
+            $(".next").hide();
+        }
     },
 
     /**

@@ -13,13 +13,11 @@ import com.lab.sockettest.websocket.WebEndPoint;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-//{"method":"home","body":{}}
+//{"method":"home","body":{"pagerIndex":1}}
 public class HomeWSRequest extends BaseWSRequest {
 	
 	private Integer pagerIndex;
-	
-	
-	
+	private String deviceId;
 
 	public Integer getPagerIndex() {
 		return pagerIndex;
@@ -27,6 +25,14 @@ public class HomeWSRequest extends BaseWSRequest {
 
 	public void setPagerIndex(Integer pagerIndex) {
 		this.pagerIndex = pagerIndex;
+	}
+
+	public String getDeviceId() {
+		return deviceId;
+	}
+
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
 	}
 
 	@Override
@@ -40,8 +46,14 @@ public class HomeWSRequest extends BaseWSRequest {
 			jobj.put("sessionKey", sessionKey);
 			DeviceBiz deviceBiz = BizFactory.getDeviceBiz();
 			jobj.put("count", deviceBiz.findAll().size());
-			//TODO:
-			jobj.put("deviceList", JSONArray.fromObject(BizFactory.getDeviceBiz().findAll()));
+			System.out.println(deviceId);
+			if (deviceId == null || deviceId.equals("")) {				
+				jobj.put("deviceList", JSONArray.fromObject(deviceBiz.findByPager(pagerIndex)));
+			} else {
+				JSONArray jsonArray = new JSONArray();
+				jsonArray.add(JSONObject.fromObject(deviceBiz.findByDeviceId(deviceId)));
+				jobj.put("deviceList", jsonArray);
+			}
 			WebEndPoint.sendJSON(session, jobj, "home");
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -11,4 +11,6 @@ public interface DeviceBiz extends BaseBiz<Device> {
 	
 	List<Device> findByPager(int pagerIndex);
 	
+	Integer countAll();
+	
 }

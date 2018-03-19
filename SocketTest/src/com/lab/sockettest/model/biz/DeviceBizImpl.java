@@ -68,4 +68,22 @@ public class DeviceBizImpl extends BaseBizImpl<Device> implements DeviceBiz {
 		return null;
 	}
 
+	@Override
+	public Integer countAll() {
+		String shitQL = "select o.id from " + Device.class.getName() + 
+				" o order by o.id desc";		
+		try {
+			return dbSession.query(Device.class, shitQL).size();
+		} catch (ShitDBJDBCException e) {
+			e.printStackTrace();
+		} catch (ShitDBWrongControlException e) {
+			e.printStackTrace();
+		} catch (ShitDBConfigureException e) {
+			e.printStackTrace();
+		} catch (ShitDBTranslateException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 }
