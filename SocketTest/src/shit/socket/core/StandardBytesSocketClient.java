@@ -5,6 +5,8 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import shit.helper.ShitReflectException;
 
@@ -48,6 +50,7 @@ public class StandardBytesSocketClient extends StandardSocketClient<StandardByte
 	private void doSomething(byte[] data) {
 		System.out.println("\n\n");
 		System.out.println(data + "**************************************************************************************************");
+		System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		try {
 			receiveAction.parse(this, data);
 		} catch (ShitReflectException e) {

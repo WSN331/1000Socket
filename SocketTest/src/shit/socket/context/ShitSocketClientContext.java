@@ -54,6 +54,10 @@ public class ShitSocketClientContext implements ShitSocketContext<ShitSocketClie
 	@Override
 	public void set(String key, ShitSocketClient value) {
 		if (clientMap != null) {
+			ShitSocketClient<?> breValue = clientMap.get(key);
+			if (breValue != null) {
+				breValue.close();
+			}
 			clientMap.put(key, value);
 		}
 	}
