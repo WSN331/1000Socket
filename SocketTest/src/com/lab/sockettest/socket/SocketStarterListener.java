@@ -28,6 +28,7 @@ public class SocketStarterListener implements ServletContextListener {
      */
     public SocketStarterListener() {
     	terminalServer = new StandardBytesSocketServer(new ShitSocketClientContext(), "utf-8", 5000, new MyPackParser("com.lab.sockettest"), 1024);
+    	terminalServer.setSoTimeOut(20000);
     }
 
 	/**

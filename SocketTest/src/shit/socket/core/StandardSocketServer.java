@@ -56,6 +56,9 @@ public abstract class StandardSocketServer extends ShitSocketServer {
 	protected void runInternal() {
 		try {
 			Socket clientSocket = serverSocket.accept();
+			if (soTimeOut != null) {
+				clientSocket.setSoTimeout(soTimeOut);
+			}
 			ShitSocketClient<?> client = initClient(clientSocket);
 			System.out.println("client connect....");
 //			if (ioType != null && ioType.equals(IO_TYPE_STRING)) {				

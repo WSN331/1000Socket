@@ -95,7 +95,7 @@ public abstract class ShitSocketClient<T extends ShitSocketServer> extends Runna
 	 * 注册到容器中以方便其他链接访问
 	 */
 	public void register(String key) {
-		if (shitSocketServer != null) {
+		if (shitSocketServer != null && this.key == null) {
 			ShitSocketClientContext context = shitSocketServer.getShitSocketContext();
 			if (context != null) {
 				context.set(key, this);

@@ -26,6 +26,11 @@ public abstract class ShitSocketServer extends RunnableLifeCycle {
 	 * 解析器
 	 */
 	protected PackParser parser;
+	
+	/**
+	 * 设置读取的超时时间
+	 */
+	protected Integer soTimeOut;
 		
 	public ShitSocketServer(ShitSocketClientContext shitSocketClientContext, String charset, PackParser parser) {
 		super();
@@ -58,6 +63,9 @@ public abstract class ShitSocketServer extends RunnableLifeCycle {
 		this.parser = parser;
 	}
 
+	public void setSoTimeOut(Integer soTimeOut) {
+		this.soTimeOut = soTimeOut;
+	}
 
 	@Override
 	protected void closeInternal() {
