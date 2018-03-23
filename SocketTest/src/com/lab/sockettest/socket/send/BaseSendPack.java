@@ -46,14 +46,15 @@ public abstract class BaseSendPack implements Serializable {
 		
 		BytesUtil.addBytes(result, 4, funcCode);
 		BytesUtil.addBytes(result, 6, id);
+		System.out.println("send body length: " + body.length);
 		BytesUtil.addBytes(result, 10, BytesUtil.intToBytes(body.length, 2));
 
-		BytesUtil.addBytes(result, 12, body());
+		BytesUtil.addBytes(result, 12, body);
 		
-		result[result.length-1] = (byte)74;
-		result[result.length-2] = (byte)74;
-		result[result.length-3] = (byte)72;
-		result[result.length-4] = (byte)72;
+		result[result.length-1] = (byte)72;
+		result[result.length-2] = (byte)72;
+		result[result.length-3] = (byte)74;
+		result[result.length-4] = (byte)74;
 		
 		printResult(result);
 		

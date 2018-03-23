@@ -46,7 +46,6 @@ public class UpdateVersionRequest extends BaseReceivePack {
 		
 		UpdateVersionResponse response = new UpdateVersionResponse();
 		response.setId(id);
-		response.setFuncCode(new byte[]{(byte)01, (byte)02});
 		//TODO
 		Version version = BizFactory.getVersionBiz().findLastVersion();
 		if (version != null) {			

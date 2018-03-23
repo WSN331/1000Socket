@@ -36,7 +36,7 @@ public class StandardBytesSocketClient extends StandardSocketClient<StandardByte
 	protected void runInternal() {
 		byte[] bytes = new byte[maxLength];
 		try {
-			while (dis.read(bytes) != -1) {
+			while (flag && dis.read(bytes) != -1) {
 				if (dis.available() == 0) {
 					doSomething(bytes);
 				}

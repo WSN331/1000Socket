@@ -103,5 +103,10 @@ public abstract class ShitSocketClient<T extends ShitSocketServer> extends Runna
 			}
 		}
 	}
+	
+	@Override
+	public void run() {
+		runInternal();
+	}
 
 }

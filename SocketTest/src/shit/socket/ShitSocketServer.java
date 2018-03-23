@@ -121,4 +121,11 @@ public abstract class ShitSocketServer extends RunnableLifeCycle {
 			send(key, (byte[])obj);
 		}
 	}
+	
+	@Override
+	public void run() {
+		while (flag) {
+			runInternal();
+		}
+	}
 }

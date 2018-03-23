@@ -31,7 +31,7 @@ public class StandardStringSocketClient extends StandardSocketClient<StandardStr
 	@Override
 	protected void runInternal() {
 		try {
-			while((line = br.readLine()) != null) {				
+			while(flag && (line = br.readLine()) != null) {				
 				parseLine(line);
 			}
 		} catch (IOException e) {

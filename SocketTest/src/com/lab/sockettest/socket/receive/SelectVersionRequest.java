@@ -24,7 +24,6 @@ public class SelectVersionRequest extends BaseReceivePack {
 		
 		SelectVersionResponse response = new SelectVersionResponse();
 		response.setId(id);
-		response.setFuncCode(new byte[]{(byte)01, (byte)02});
 		//TODO
 		Version version = BizFactory.getVersionBiz().findLastVersion();
 		if (version != null) {	

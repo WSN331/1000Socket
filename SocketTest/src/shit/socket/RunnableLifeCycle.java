@@ -15,17 +15,10 @@ public abstract class RunnableLifeCycle implements LifeCycle, Runnable {
 	/**
 	 * 启停标志
 	 */
-	private boolean flag = false;
+	protected boolean flag = false;
 	
 	public RunnableLifeCycle() {
 		super();
-	}
-
-	@Override
-	public void run() {
-		while (flag) {
-			runInternal();
-		}
 	}
 
 	@Override
