@@ -18,13 +18,13 @@ import shit.socket.core.StandardBytesSocketServer;
 public class SocketStarterListener implements ServletContextListener {
 
 	private static ShitSocketServer terminalServer;
-	
+
     public static ShitSocketServer getTerminalServer() {
 		return terminalServer;
 	}
 
 	/**
-     * Default constructor. 
+     * Default constructor.
      */
     public SocketStarterListener() {
     	terminalServer = new StandardBytesSocketServer(new ShitSocketClientContext(), "utf-8", 5000, new MyPackParser("com.lab.sockettest"), 1024);
