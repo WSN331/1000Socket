@@ -69,7 +69,9 @@ public class BytesUtil {
 	public static int bytesToInt(byte[] src) {
 		int result = 0;
 		for (int i = src.length - 1; i >= 0; i--) {
-			result = src[i] * 256 ^ i;
+			System.out.println(src[0]);
+			System.out.println(Math.pow(256 , 0));
+			result = (int) (result + src[i] * Math.pow(256, (src.length - 1 - i)));
 		}
 		return result;
 	}
