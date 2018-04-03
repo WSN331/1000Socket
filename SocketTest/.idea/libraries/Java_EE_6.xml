@@ -1,27 +1,8 @@
 <component name="libraryTable">
   <library name="Java EE 6">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/annotations-api.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/catalina-ant.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/catalina-ha.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/catalina-tribes.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/catalina.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/ecj-4.4.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/el-api.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/jasper-el.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/jasper.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/jsp-api.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/servlet-api.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/tomcat-api.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/tomcat-coyote.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/tomcat-dbcp.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/tomcat-i18n-es.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/tomcat-i18n-fr.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/tomcat-i18n-ja.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/tomcat-jdbc.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/tomcat-util.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/tomcat7-websocket.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../tomcat/apache-tomcat-7.0.85/lib/websocket-api.jar!/" />
+      <root url="jar://C:/Program Files (x86)/java/tomcat/apache-tomcat-7.0.65/lib/websocket-api.jar!/" />
+      <root url="jar://C:/Program Files (x86)/java/tomcat/apache-tomcat-7.0.65/lib/servlet-api.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

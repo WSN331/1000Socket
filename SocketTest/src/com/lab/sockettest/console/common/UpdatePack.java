@@ -30,12 +30,15 @@ public class UpdatePack {
     }
 
     public int packCount() {
-        return (int) Math.ceil(packLength() / packSize);
+        int packLength = packLength();
+        double result = ((double) packLength) / packSize;
+        result = Math.ceil(result);
+        return (int) result;
     }
 
     public byte[] getOnePack(int index) {
-        int begin = (index - 1) * packSize;
-        int count = index == packCount() ? packCount() - begin : packSize;
+        int begin = (index) * packSize;
+        int count = index == packCount()-1 ? packLength() - begin : packSize;
         return BytesUtil.subBytes(latestVersionPack, begin, count);
     }
 }
