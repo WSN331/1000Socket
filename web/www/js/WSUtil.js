@@ -2,7 +2,7 @@
  * Created by ASUS on 2018/3/14 0014.
  */
 (function(window) {
-    var ip = "localhost";
+    var ip = "111.230.220.211";
     var port = 8080;
 
     var webSocket;

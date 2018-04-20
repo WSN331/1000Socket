@@ -55,6 +55,7 @@ Home.prototype = {
             WSUtil.send("home", {
                 pagerIndex : home.page,
                 deviceId : deviceId
+                
             })
         });
 
@@ -79,7 +80,7 @@ Home.prototype = {
             if (typeof device["online"] !== "undefined" && device["online"] == 1) {
                 $("<td>").addClass("online").html("在线").appendTo($tr);
             } else {
-                $("<td>").addClass("online").html("离线").appendTo($tr);
+                $("<td>").addClass("online").html("离线").appendTo($tr);s
             }
             var $td = $("<td>").appendTo($tr);
             var $switch1, $switch2;

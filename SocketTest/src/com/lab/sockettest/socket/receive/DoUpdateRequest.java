@@ -35,7 +35,6 @@ public class DoUpdateRequest extends BaseReceivePack {
 			UpdatePack updatePack = new UpdatePack(version);
 			response.setPackIndex(packIndex);
 			response.setPackCount(packCount);
-			response.setCRC16(0000);
 			response.setPack(updatePack.getOnePack(packIndex));
 		} else {
 

@@ -1,6 +1,7 @@
 package com.lab.sockettest.socket.send;
 
 import com.lab.sockettest.console.util.BytesUtil;
+import com.lab.sockettest.console.util.CRC16Util;
 import shit.socket.pack.Send;
 
 public class DoUpdateResponse extends BaseSendPack {
@@ -20,8 +21,6 @@ public class DoUpdateResponse extends BaseSendPack {
 	private int packIndex;
 
 	private byte[] pack;
-
-	private int CRC16;
 
 	public int getPackCount() {
 		return packCount;
@@ -47,13 +46,6 @@ public class DoUpdateResponse extends BaseSendPack {
 		this.pack = pack;
 	}
 
-	public int getCRC16() {
-		return CRC16;
-	}
-
-	public void setCRC16(int CRC16) {
-		this.CRC16 = CRC16;
-	}
 
 	@Override
 	protected byte[] body() {
@@ -63,7 +55,7 @@ public class DoUpdateResponse extends BaseSendPack {
 		BytesUtil.addBytes(b, 2, BytesUtil.intToBytes(packIndex, 2));
 		BytesUtil.addBytes(b, 4, BytesUtil.intToBytes(packSize, 2));
 		BytesUtil.addBytes(b, 6, pack);
-		BytesUtil.addBytes(b, 6 + packSize, BytesUtil.intToBytes(CRC16, 2));
+		BytesUtil.addBytes(b, 6 + packSize, BytesUtil.intToBytes(CRC16Util.calcCrc16(pack), 2));
 		return b;
 	}
 
