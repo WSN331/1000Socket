@@ -92,6 +92,7 @@ public class RegisterRequest extends BaseReceivePack {
 				device.setDeviceId(deviceId);
 				device.setType(deviceType);
 				device.setVersion(deviceVersion);
+				device.setOnline(1);
 				BizFactory.getDeviceBiz().save(device);
 			}
 		} catch (Exception e) {

@@ -4,6 +4,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import com.lab.sockettest.model.Dao;
 import com.lab.sockettest.socket.parser.MyPackParser;
 
 import shit.socket.ShitSocketServer;
@@ -15,9 +16,10 @@ import shit.socket.core.StandardBytesSocketServer;
  *
  */
 @WebListener
-public class SocketStarterListener implements ServletContextListener {
+public class SocketStarterListener extends Dao {
 
 	private static ShitSocketServer terminalServer;
+	private static OnLineThread onLineThread;
 
     public static ShitSocketServer getTerminalServer() {
 		return terminalServer;
@@ -29,21 +31,26 @@ public class SocketStarterListener implements ServletContextListener {
     public SocketStarterListener() {
     	terminalServer = new StandardBytesSocketServer(new ShitSocketClientContext(), "utf-8", 5000, new MyPackParser("com.lab.sockettest"), 1024);
     	terminalServer.setSoTimeOut(60000);
+
     }
 
 	/**
      * @see ServletContextListener#contextDestroyed(ServletContextEvent)
      */
-    public void contextDestroyed(ServletContextEvent arg0)  { 
+    public void contextDestroyed(ServletContextEvent arg0)  {
+    	super.contextDestroyed(arg0);
         terminalServer.close();
+        onLineThread.stop();
     }
 
 	/**
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
-    public void contextInitialized(ServletContextEvent arg0)  { 
+    public void contextInitialized(ServletContextEvent arg0)  {
+    	super.contextInitialized(arg0);
 		terminalServer.start();
-		
+		onLineThread = new OnLineThread();
+		new Thread(onLineThread).start();
     }
 	
 }

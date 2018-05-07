@@ -26,6 +26,7 @@ public class HeartRequest extends BaseReceivePack {
 		Device device = BizFactory.getDeviceBiz().findByDeviceId(socketClient.getKey());
 		if (device != null) {
 			device.setLastHeartTime(new Date());
+			device.setOnline(1);
 			BizFactory.getDeviceBiz().update(device);
 		}
 		HeartResponse response = new HeartResponse();

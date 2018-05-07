@@ -18,7 +18,7 @@ import shit.db.cfg.ShitDBDataSource;
 import shit.db.exception.ShitDBConfigureException;
 import shit.db.exception.ShitDBConnectException;
 import shit.db.impl.ShitDBSessionJDBCFactory;
-@WebListener
+
 public class Dao implements ServletContextListener {
 	
 	private static ShitDBSession session = null;
