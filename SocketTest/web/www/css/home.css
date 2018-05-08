@@ -1,0 +1,22 @@
+.table tbody tr td{
+            vertical-align: middle;
+}
+
+.table tbody tr th{
+            vertical-align: middle;
+}
+
+th {
+    text-align: center;
+}
+
+.main {
+    text-align: center;
+}
+
+.admin-table {
+    padding-top: 15px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 15px;
+}

@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Websocket message test</title>
+    <script type="text/javascript">
+        var socket;
+        function SocketInit()
+        {
+            if (socket) {
+                socket.close();
+            }
+
+            var vServerIP = document.getElementById("txt_ServerIP");
+            var vServerPort = document.getElementById("txt_ServerPort");
+            var vServerUri = document.getElementById("txt_ServerUri");
+            var vConnectState = document.getElementById("lbl_ConnectState");
+            if (vServerIP.value.length == 0) {
+                alert("Please input Server IP !");
+                return;
+            }
+            if (vServerPort.value.length == 0) {
+                alert("Please input Server Port !");
+                return;
+            }
+            if (isNaN(vServerPort.value)) {
+                alert("Server port must be a number !");
+                return;
+            }
+            
+            socket = new WebSocket("ws://" + vServerIP.value + ":" + vServerPort.value + vServerUri.value);
+
+            socket.onopen = function () {
+                vConnectState.style.color = "green";
+                vConnectState.innerText = "Connected";
+            };
+
+            socket.onmessage = function (result) {
+                var time = new Date();
+                document.getElementById("txt_ReceiveMsg").value = result.data + "     Time:" + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + "\n" + document.getElementById("txt_ReceiveMsg").value;
+            };
+
+            socket.onerror = function (error) {
+                
+            };
+
+            socket.onclose = function () {
+                vConnectState.style.color = "red";
+                vConnectState.innerText = "Disconnected";
+            };
+        }
+
+        function Init() {
+            var para = {
+                "Model": "3",
+                "Type": "24",
+                "DeviceIP": "192.168.1.253",
+                "Value": {
+                    "Para1": "",
+                }
+            };
+            document.getElementById("txt_SendMsg").value = JSON.stringify(para);
+        }
+
+        function ConnectStateInit() {
+            var vConnectState = document.getElementById("lbl_ConnectState");
+            vConnectState.innerText = "";
+        }
+
+        function SendMsg() {
+            var vSendMsgValue = document.getElementById("txt_SendMsg").value;
+            if (vSendMsgValue.length == 0) {
+                alert("Please input Send message !");
+                return;
+            }
+            if (!socket || socket.readyState != 1) {
+                alert("Please connect server first !");
+                return;
+            }
+            socket.send(vSendMsgValue);
+        }
+
+        function ClearReceiveMsg() {
+            document.getElementById("txt_ReceiveMsg").value = "";
+        }
+    </script>
+</head>
+<body style="margin:0;padding:0;" onload="Init()">
+    <div style="margin:auto;width:900px;">
+        <div style="font-weight:bold;font-size:20px;text-align:center">Websocket message test</div>
+        <div>
+            <table cellpadding="0" cellspacing="8">
+                <tr>
+                    <td>
+                        Server IP:
+                    </td>
+                    <td>
+                        <input id="txt_ServerIP" type="text" style="width:150px" value="localhost" />
+                    </td>
+                    <td style="padding-left:20px">
+                        Server Port:
+                    </td>
+                    <td>
+                        <input id="txt_ServerPort" type="text" style="width:150px" value="6604" />
+                    </td>
+					 <td style="padding-left:20px">
+                        Server Uri:
+                    </td>
+                    <td>
+                        <input id="txt_ServerUri" type="text" style="width:150px" value="/" />
+                    </td>
+                    <td style="padding-left:20px">
+                        <input id="btn_Connect" type="button" value="Connect" style="width:100px" onclick="ConnectStateInit();SocketInit()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        Server connection status:
+                        <label id="lbl_ConnectState"></label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="margin-left:8px">
+            <span style="vertical-align:top;margin-right:20px">Send message:</span>
+            <textarea id="txt_SendMsg" rows="15" cols="80" style="vertical-align:middle"></textarea>
+            <input id="btn_SendMsg" type="button" value="Send" style="width:100px;height:50px;vertical-align:middle" onclick="SendMsg()" />
+        </div>
+        <div style="margin-top:20px;margin-left:8px">
+            <div style="margin-bottom:5px">Receive message:</div>
+            <textarea id="txt_ReceiveMsg" rows="25" cols="120" style="vertical-align:middle"></textarea>
+            <div style="margin-top:5px">
+                <input id="btn_ClearReceiveMsg" type="button" value="ClearReceiveMessage" onclick="ClearReceiveMsg()" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

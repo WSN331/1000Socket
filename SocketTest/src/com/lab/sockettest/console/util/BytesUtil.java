@@ -57,7 +57,7 @@ public class BytesUtil {
 			return null;
 		}
 		String str = new String(src);
-		return str;
+		return str.trim();
 	}
 
 	/**

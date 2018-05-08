@@ -28,6 +28,7 @@ public class OnLineThread implements Runnable {
             for (Device device : deviceList) {
                 if (device.getLastHeartTime() == null || now.getTime() - device.getLastHeartTime().getTime() > ONLINE_TIME) {
                     device.setOnline(0);
+                    deviceBiz.update(device);
                 }
             }
             try {

@@ -1,5 +1,6 @@
 package com.lab.sockettest.socket.receive;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -8,6 +9,8 @@ import com.lab.sockettest.model.BizFactory;
 import com.lab.sockettest.model.bean.Device;
 import com.lab.sockettest.socket.send.RegisterResponse;
 
+import com.lab.sockettest.websocket.WebEndPoint;
+import com.lab.sockettest.websocket.response.DeviceStateChangeResponse;
 import shit.socket.core.StandardBytesSocketClient;
 import shit.socket.pack.ReceiveAction;
 
@@ -94,6 +97,20 @@ public class RegisterRequest extends BaseReceivePack {
 				device.setVersion(deviceVersion);
 				device.setOnline(1);
 				BizFactory.getDeviceBiz().save(device);
+			} else {
+				device.setType(deviceType);
+				device.setVersion(deviceVersion);
+				device.setSwitch1(0);
+				device.setSwitch2(0);
+				device.setOnline(1);
+				BizFactory.getDeviceBiz().update(device);
+				DeviceStateChangeResponse response = new DeviceStateChangeResponse();
+				response.setDevice(device);
+				try {
+					WebEndPoint.sendResponseToAll(response);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

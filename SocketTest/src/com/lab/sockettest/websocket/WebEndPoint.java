@@ -36,7 +36,7 @@ public class WebEndPoint {
 	}
 	
 	public static void sendJSON(Session session, JSONObject jobj, String method) throws IOException {
-		if (session != null) {
+		if (session != null && session.isOpen()) {
 			jobj.put("method", method);
 			session.getBasicRemote().sendText(jobj.toString());
 		}
@@ -51,7 +51,7 @@ public class WebEndPoint {
 	 */
 	public static void sendMessage(String key, String message) throws IOException {
 		Session session = sessionMap.get(key);
-		if (session != null) {
+		if (session != null && session.isOpen()) {
 			session.getBasicRemote().sendText(message);
 		}
 	}
@@ -85,7 +85,7 @@ public class WebEndPoint {
 	 * @throws IOException
 	 */
 	public static void sendResponseToAll(WSResponse response) throws IOException {
-		if (response != null) {			
+		if (response != null) {
 			sendMessageToAll(response.response());
 		}
 	}

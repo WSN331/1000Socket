@@ -44,7 +44,7 @@ public class Dao implements ServletContextListener {
 		readProperties("jdbc.properties");
 		ShitDBDataSource dataSource = new ShitDBC3P0DataSource();
 		dataSource.setDataSourceByProperties(props);
-		dataSource.setShowSql(true);
+		dataSource.setShowSql(false);
 		ShitDBSessionFactory factory = new ShitDBSessionJDBCFactory();
 		factory.setDataSource(dataSource);
 		try {
