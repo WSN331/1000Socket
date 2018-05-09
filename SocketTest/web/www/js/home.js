@@ -34,6 +34,7 @@ Home.prototype = {
      */
     init : function () {
         WSUtil.registerFunction("home", this.refreshList);
+        WSUtil.registerFunction("alert", this.alertMessage);
         WSUtil.registerFunction("deviceStateChange", this.deviceStateChange);
         WSUtil.connect(function () {
             console.log(window.location)
@@ -59,6 +60,10 @@ Home.prototype = {
             })
         });
 
+    },
+
+    alertMessage : function (data) {
+          alert(data['message']);
     },
 
     /**

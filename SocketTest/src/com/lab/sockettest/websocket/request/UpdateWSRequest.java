@@ -3,9 +3,14 @@ package com.lab.sockettest.websocket.request;
 import javax.websocket.Session;
 
 import com.lab.sockettest.model.BizFactory;
+import com.lab.sockettest.model.bean.Device;
 import com.lab.sockettest.model.bean.Version;
 import com.lab.sockettest.socket.SocketStarterListener;
-import com.lab.sockettest.socket.send.ServerAccordUpdateResquest;
+import com.lab.sockettest.socket.send.ServerAccordUpdateRequest;
+import com.lab.sockettest.websocket.WebEndPoint;
+import net.sf.json.JSONObject;
+
+import java.io.IOException;
 
 //{"method":"update","body":{"sessionKey":"20180314120008771", "deviceId": "dlkz000111111111"},"type":01}
 public class UpdateWSRequest extends BaseWSRequest {
@@ -42,14 +47,26 @@ public class UpdateWSRequest extends BaseWSRequest {
 
 	@Override
 	public void action(Session session) {
-		ServerAccordUpdateResquest request = new ServerAccordUpdateResquest();
+		ServerAccordUpdateRequest request = new ServerAccordUpdateRequest();
 		Version version = BizFactory.getVersionBiz().findLastVersion();
+		Device device = BizFactory.getDeviceBiz().findByDeviceId(deviceId);
 		if (version != null) {
-			request.setCount(version.getCount());
-			request.setSize(version.getSize());
-			request.setType(type);
-			request.setVersion(version.getVersion());			
-			SocketStarterListener.getTerminalServer().sendPack(deviceId, request);
+			if (device == null || !device.getVersion().equals(version.getVersion())) {
+				request.setCount(version.getCount());
+				request.setSize(version.getSize());
+				request.setType(type);
+				request.setVersion(version.getVersion());
+				SocketStarterListener.getTerminalServer().sendPack(deviceId, request);
+			} else {
+				JSONObject jobj = new JSONObject();
+				jobj.put("message", "已经是最新版本!!!");
+				try {
+					WebEndPoint.sendJSON(session, jobj, "alert");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}
 		}
 	}
 

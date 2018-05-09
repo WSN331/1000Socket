@@ -4,14 +4,14 @@ import com.lab.sockettest.console.util.BytesUtil;
 
 import shit.socket.pack.Send;
 
-public class ServerAccordUpdateResquest extends BaseSendPack {
+public class ServerAccordUpdateRequest extends BaseSendPack {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3698977595014511293L;
 	
-	public ServerAccordUpdateResquest() {
+	public ServerAccordUpdateRequest() {
 		super();
 		funcCode = new byte[] {05, 03};
 	}
