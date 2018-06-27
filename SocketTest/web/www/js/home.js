@@ -29,6 +29,8 @@ Home.prototype = {
      */
     page : 1,
 
+    pageSize : 10,
+
     /**
      * 界面初始化
      */
@@ -75,13 +77,14 @@ Home.prototype = {
         $tbody.empty();
         this.sessionKey = data["sessionKey"];
         home.deviceList = data['deviceList'];
-        console.log(data["count"]/10)
+        console.log(data["count"]/home.pageSize)
         console.log(home.deviceList)
-        var pageCount = Math.ceil(data["count"] / 10);
+        var pageCount = Math.ceil(data["count"] / home.pageSize);
         for (var i in home.deviceList) {
             var device = home.deviceList[i];
             var $tr = $("<tr>").attr("id", "device" + i).appendTo($tbody);
-            $("<th scope='row'>1</th>").html(parseInt(i) + 1).appendTo($tr);
+            $("<th scope='row'>1</th>").html((parseInt(home.page) -1) * home.pageSize + parseInt(i) + 1)
+                .appendTo($tr);
             $("<td>").html(device["deviceId"]).appendTo($tr);
             $("<td>").addClass("version").html(device["version"]).appendTo($tr);
             if (typeof device["online"] !== "undefined" && device["online"] == 1) {
