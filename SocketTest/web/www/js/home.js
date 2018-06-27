@@ -71,16 +71,17 @@ Home.prototype = {
      * @param data
      */
     refreshList : function (data) {
-        var $table = $(".table");
-        $table.empty();
+        var $tbody = $(".tbody");
+        $tbody.empty();
         this.sessionKey = data["sessionKey"];
         home.deviceList = data['deviceList'];
         console.log(data["count"]/10)
+        console.log(home.deviceList)
         var pageCount = Math.ceil(data["count"] / 10);
         for (var i in home.deviceList) {
             var device = home.deviceList[i];
-            var $tr = $("<tr>").attr("id", "device" + i).appendTo($table);
-            $("<th scope='row'>1</th>").html(i + 1).appendTo($tr);
+            var $tr = $("<tr>").attr("id", "device" + i).appendTo($tbody);
+            $("<th scope='row'>1</th>").html(parseInt(i) + 1).appendTo($tr);
             $("<td>").html(device["deviceId"]).appendTo($tr);
             $("<td>").addClass("version").html(device["version"]).appendTo($tr);
             if (typeof device["online"] !== "undefined" && device["online"] == 1) {
@@ -130,6 +131,9 @@ Home.prototype = {
         console.log(this);
         var id = this.parentNode.parentNode.id.substr(6);
         var device = home.deviceList[id];
+        if (typeof device["online"] === "undefined" || device["online"] != 1) {
+            alert("设备已离线")
+        }
         var type = this.getAttribute("type");
         if (type == "offSwitch1") {
             device["switch1"] = 0;
@@ -155,6 +159,9 @@ Home.prototype = {
     restart : function () {
         var id = this.parentNode.parentNode.id.substr(6);
         var device = home.deviceList[id];
+        if (typeof device["online"] === "undefined" || device["online"] != 1) {
+            alert("设备已离线")
+        }
         var body = {
             sessionKey: this.sessionKey,
             deviceId: device["deviceId"]
@@ -168,6 +175,9 @@ Home.prototype = {
     update : function () {
         var id = this.parentNode.parentNode.id.substr(6);
         var device = home.deviceList[id];
+        if (typeof device["online"] === "undefined" || device["online"] != 1) {
+            alert("设备已离线")
+        }
         var body = {
             sessionKey: this.sessionKey,
             deviceId: device["deviceId"],
