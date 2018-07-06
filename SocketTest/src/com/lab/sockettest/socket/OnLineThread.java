@@ -30,7 +30,11 @@ public class OnLineThread implements Runnable {
                     device.setOnline(0);
                     deviceBiz.update(device);
                 }
+                device = null;
             }
+            deviceList = null;
+            now = null;
+            System.gc();
             try {
                 Thread.sleep(10 * 1000);
             } catch (InterruptedException e) {

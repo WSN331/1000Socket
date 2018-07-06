@@ -122,7 +122,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Java EE 6" level="project" />
     <orderEntry type="library" name="servlet-api" level="project" />
   </component>
 </module>
