@@ -31,7 +31,6 @@ public class SocketStarterListener extends Dao {
     public SocketStarterListener() {
     	terminalServer = new StandardBytesSocketServer(new ShitSocketClientContext(), "utf-8", 5000, new MyPackParser("com.lab.sockettest"), 1024);
     	terminalServer.setSoTimeOut(60000);
-
     }
 
 	/**
@@ -40,7 +39,7 @@ public class SocketStarterListener extends Dao {
     public void contextDestroyed(ServletContextEvent arg0)  {
     	super.contextDestroyed(arg0);
         terminalServer.close();
-        onLineThread.stop();
+//        onLineThread.stop();
     }
 
 	/**
@@ -49,8 +48,8 @@ public class SocketStarterListener extends Dao {
     public void contextInitialized(ServletContextEvent arg0)  {
     	super.contextInitialized(arg0);
 		terminalServer.start();
-		onLineThread = new OnLineThread();
-		new Thread(onLineThread).start();
+//		onLineThread = new OnLineThread();
+//		new Thread(onLineThread).start();
     }
 	
 }
