@@ -90,6 +90,12 @@ public class ShitDBResultModel implements ShitDBResult<List<Serializable>> {
 		} catch (ShitReflectException e) {
 			e.printStackTrace();
 			throw new ShitDBResultException("类初始化错误");
+		} finally {
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return list;
 	}

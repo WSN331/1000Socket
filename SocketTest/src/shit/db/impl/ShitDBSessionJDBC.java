@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
+import shit.db.connection.ShitDBConnection;
 import shit.db.exception.ShitDBConfigureException;
 import shit.db.exception.ShitDBJDBCException;
 import shit.db.exception.ShitDBTranslateException;
@@ -21,11 +22,11 @@ import shit.db.query.ShitDBQueryBasic;
  */
 public class ShitDBSessionJDBC extends ShitDBSessionBasic {
 
-	public ShitDBSessionJDBC(Connection conn) {
+	public ShitDBSessionJDBC(ShitDBConnection conn) {
 		super(conn);
 	}
 
-	public ShitDBSessionJDBC(Connection conn, boolean showSql) {
+	public ShitDBSessionJDBC(ShitDBConnection conn, boolean showSql) {
 		super(conn, showSql);
 	}
 
@@ -33,15 +34,18 @@ public class ShitDBSessionJDBC extends ShitDBSessionBasic {
 	public List<? extends Serializable> query(Class<? extends Serializable> clazz, String shitQL,
 			Map<String, Serializable> params, ShitDBPager pager) throws ShitDBJDBCException,
 					ShitDBWrongControlException, ShitDBConfigureException, ShitDBTranslateException {
-		ShitDBQuery query = new ShitDBQueryBasic(conn, clazz, shitQL, pager, params);
+		Connection execConn = getExecConn();
+		ShitDBQuery query = new ShitDBQueryBasic(execConn, clazz, shitQL, pager, params);
 		query.setShowSql(showSql);
 		List<Serializable> list = query.query();
+		query = null;
+		closeConn(execConn);
 		return list;
 	}
 
-	@Override
-	public ShitDBQuery query(Class<? extends Serializable> clazz) {
-		return new ShitDBQueryBasic(conn, clazz);
-	}
+//	@Override
+//	public ShitDBQuery query(Class<? extends Serializable> clazz) {
+//		return new ShitDBQueryBasic(conn, clazz);
+//	}
 
 }

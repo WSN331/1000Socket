@@ -44,7 +44,7 @@ public class ShitDBQueryBasic extends ShitDBQuery {
 			ShitDBTranslateException {
 		executeQuery.setShowSql(showSql);
 		ShitDBResultModel result = initDBQuery();
-		List<Serializable> list = result.analysis(executeQuery.excute());
+		List<Serializable> list = result.analysis(executeQuery.execute());
 		return list;
 	}
 

@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import shit.db.connection.ShitDBConnection;
+import shit.db.exception.ShitDBConnectException;
 import shit.db.exception.ShitDBExecuteException;
 
 /**
@@ -17,19 +19,6 @@ import shit.db.exception.ShitDBExecuteException;
  *            操作返回
  */
 public abstract class ShitDBExecuteSQL<T> {
-	/**
-	 * 数据库连接
-	 */
-	protected Connection conn;
-
-	public ShitDBExecuteSQL(Connection conn) {
-		super();
-		this.conn = conn;
-	}
-
-	public void setConn(Connection conn) {
-		this.conn = conn;
-	}
 
 	/**
 	 * 执行带占位符数据库操作
@@ -42,7 +31,7 @@ public abstract class ShitDBExecuteSQL<T> {
 	 * @throws ShitDBExecuteException
 	 *             执行错误
 	 */
-	public abstract T execute(String sql, List<Serializable> params) throws ShitDBExecuteException;
+	public abstract T execute(Connection execConn, String sql, List<Serializable> params) throws ShitDBExecuteException;
 
 	/**
 	 * 生成PreparedStatement
@@ -55,18 +44,22 @@ public abstract class ShitDBExecuteSQL<T> {
 	 * @throws ShitDBExecuteException
 	 *             执行出错
 	 */
-	protected PreparedStatement prepareStatement(String sql, List<Serializable> params) throws ShitDBExecuteException {
-		PreparedStatement stmt = null;
+	protected PreparedStatement prepareStatement(Connection executeConn, String sql, List<Serializable> params) throws ShitDBExecuteException {
 		try {
-			stmt = conn.prepareStatement(sql);
+			PreparedStatement stmt = null;
+			if (executeConn == null) {
+				throw new ShitDBExecuteException("数据源错误");
+			}
+			stmt = executeConn.prepareStatement(sql);
 			for (int i = 0; i < params.size(); i++) {
 				// 遍历绑定占位符参数
 				stmt.setObject(i + 1, params.get(i));
 			}
+			return stmt;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new ShitDBExecuteException("参数绑定中发生错误");
 		}
-		return stmt;
+
 	}
 }

@@ -51,7 +51,7 @@ public class DeviceBizImpl extends BaseBizImpl<Device> implements DeviceBiz {
 	@Override
 	public List<Device> findByPager(int pagerIndex) {
 		String shitQL = "select * from " + Device.class.getName() + 
-				" o order by o.id desc";		
+				" o order by o.online desc, o.id desc";
 		Map<String, Serializable> params = new HashMap<>(1);
 		ShitDBPager pager = new ShitDBPager(Constants.PAGE_SIZE, pagerIndex);
 		try {

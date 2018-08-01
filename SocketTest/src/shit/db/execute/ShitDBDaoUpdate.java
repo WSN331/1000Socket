@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
+import shit.db.connection.ShitDBConnection;
 import shit.db.exception.ShitDBConfigureException;
 import shit.db.exception.ShitDBExecuteException;
 import shit.db.exception.ShitDBJDBCException;

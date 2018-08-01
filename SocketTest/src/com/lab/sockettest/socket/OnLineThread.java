@@ -23,7 +23,7 @@ public class OnLineThread implements Runnable {
     @Override
     public void run() {
         while (flag) {
-//            System.out.println("***********************************onLineThread running************************************");
+            System.out.println("***********************************onLineThread running************************************");
             List<Device> deviceList = deviceBiz.findAll();
             Date now = new Date();
             for (Device device : deviceList) {
@@ -36,11 +36,11 @@ public class OnLineThread implements Runnable {
             deviceList = null;
             now = null;
             try {
-                Thread.sleep(10 * 1000);
+                Thread.sleep(60 * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
-//                System.gc();
+                System.gc();
             }
         }
     }

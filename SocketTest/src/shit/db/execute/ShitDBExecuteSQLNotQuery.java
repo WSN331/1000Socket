@@ -6,17 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import shit.db.connection.ShitDBConnection;
 import shit.db.exception.ShitDBExecuteException;
 
 public class ShitDBExecuteSQLNotQuery extends ShitDBExecuteSQL<Void> {
 
-	public ShitDBExecuteSQLNotQuery(Connection conn) {
-		super(conn);
-	}
-
 	@Override
-	public Void execute(String sql, List<Serializable> params) throws ShitDBExecuteException {
-		PreparedStatement stmt = prepareStatement(sql, params);
+	public Void execute(Connection execConn, String sql, List<Serializable> params) throws ShitDBExecuteException {
+		PreparedStatement stmt = prepareStatement(execConn, sql, params);
 		try {
 			stmt.execute();
 		} catch (SQLException e) {

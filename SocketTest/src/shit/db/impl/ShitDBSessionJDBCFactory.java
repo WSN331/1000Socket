@@ -40,7 +40,7 @@ public class ShitDBSessionJDBCFactory implements ShitDBSessionFactory {
 
 	@Override
 	public ShitDBSession getSession() throws ShitDBConnectException {
-		return new ShitDBSessionJDBC(conn.getConnection(), dataSource.isShowSql());
+		return new ShitDBSessionJDBC(conn, dataSource.isShowSql());
 	}
 
 }

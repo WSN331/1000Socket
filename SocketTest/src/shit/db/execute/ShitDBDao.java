@@ -4,6 +4,8 @@ import shit.db.exception.ShitDBExecuteException;
 import shit.db.exception.ShitDBTranslateException;
 import shit.db.sql.ShitQLTranslator;
 
+import java.sql.Connection;
+
 /**
  * 数据库操作的执行体，被session或query等调用的dao，调用sql翻译器和sql执行器完成数据库操作
  * 
@@ -31,6 +33,15 @@ public abstract class ShitDBDao<T extends ShitDBExecuteSQL<?>, E> {
 	boolean showSql = false;
 
 	/**
+	 * 数据库连接
+	 */
+	protected Connection conn;
+
+	public ShitDBDao(Connection conn) {
+		this.conn = conn;
+	}
+
+	/**
 	 * 设置是否显示sql语句
 	 * 
 	 * @param showSql
@@ -56,6 +67,6 @@ public abstract class ShitDBDao<T extends ShitDBExecuteSQL<?>, E> {
 	 *             执行出错
 	 * @throws ShitDBTranslateException
 	 */
-	public abstract E excute() throws ShitDBExecuteException, ShitDBTranslateException;
+	public abstract E execute() throws ShitDBExecuteException, ShitDBTranslateException;
 
 }

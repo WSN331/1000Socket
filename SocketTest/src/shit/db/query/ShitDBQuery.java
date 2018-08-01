@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import shit.db.connection.ShitDBConnection;
 import shit.db.exception.ShitDBConfigureException;
 import shit.db.exception.ShitDBExecuteException;
 import shit.db.exception.ShitDBJDBCException;
@@ -56,6 +57,7 @@ public abstract class ShitDBQuery {
 	 * 是否显示sql
 	 */
 	protected boolean showSql = false;
+	private boolean isInit = false;
 
 	/**
 	 * 连接构造
@@ -243,7 +245,7 @@ public abstract class ShitDBQuery {
 		params.put("id", id);
 		ShitDBResultModel result = initDBQuery();
 		executeQuery.setShowSql(showSql);
-		List<Serializable> list = result.analysis(executeQuery.excute());
+		List<Serializable> list = result.analysis(executeQuery.execute());
 		if (list != null && list.size() > 0) {
 			return list.get(0);
 		}
@@ -256,10 +258,13 @@ public abstract class ShitDBQuery {
 	 * @return 结果处理器
 	 */
 	protected ShitDBResultModel initDBQuery() {
-		executeQuery.setModelClazz(modelClass);
-		executeQuery.setPager(pager);
-		executeQuery.setShitQL(shitQL);
-		executeQuery.setParamMap(params);
+		if (!isInit) {
+			executeQuery.setModelClazz(modelClass);
+			executeQuery.setPager(pager);
+			executeQuery.setShitQL(shitQL);
+			executeQuery.setParamMap(params);
+			isInit = true;
+		}
 		return new ShitDBResultModel(modelClass, this);
 	}
 }

@@ -23,19 +23,15 @@ public abstract class ShitDBDaoNotQuery extends ShitDBDao<ShitDBExecuteSQLNotQue
 	 * shitSQL的构造器
 	 */
 	protected ShitQLBuilder shitQLBuilder;
-	/**
-	 * 数据库连接
-	 */
-	protected Connection conn;
 
 	/**
 	 * 
 	 * @param conn
 	 */
 	public ShitDBDaoNotQuery(Connection conn) {
-		super();
+		super(conn);
 		this.conn = conn;
-		execute = new ShitDBExecuteSQLNotQuery(conn);
+		execute = new ShitDBExecuteSQLNotQuery();
 	}
 
 	/**
@@ -67,13 +63,13 @@ public abstract class ShitDBDaoNotQuery extends ShitDBDao<ShitDBExecuteSQLNotQue
 	}
 
 	@Override
-	public Serializable excute() throws ShitDBExecuteException, ShitDBTranslateException {
+	public Serializable execute() throws ShitDBExecuteException, ShitDBTranslateException {
 		setTranslator();
 		String sql = translator.getSql();
 		if (showSql) {
 			System.out.println(sql);
 		}
-		execute.execute(sql, translator.getParamList());
+		execute.execute(conn, sql, translator.getParamList());
 		return handleAfterExcute();
 	}
 

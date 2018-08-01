@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.util.Map;
 
+import shit.db.connection.ShitDBConnection;
 import shit.db.exception.ShitDBExecuteException;
 import shit.db.exception.ShitDBResultException;
 import shit.db.exception.ShitDBTranslateException;
@@ -48,7 +49,7 @@ public class ShitDBDaoSave extends ShitDBDaoNotQuery {
 			String key = clazz.getAnnotation(ShitDBTable.class).primaryKey();
 			String tableKey = ShitReflectHelper.findFieldByName(clazz, key, true).getAnnotation(ShitDBField.class).name();
 			ShitDBResultId result = new ShitDBResultId(tableKey);
-			Serializable id = result.analysis(query.excute());
+			Serializable id = result.analysis(query.execute());
 			ShitReflectHelper.setValue(model, key, String.valueOf(id), true);
 		} catch (ShitDBResultException e) {
 			e.printStackTrace();

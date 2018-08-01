@@ -52,9 +52,9 @@ public class ShitDBDaoQuery extends ShitDBDao<ShitDBExecuteSQLQuery, ResultSet> 
 	 */
 	public ShitDBDaoQuery(Connection conn, Class<?> modelClazz, String shitQL, Map<String, Serializable> paramMap,
 			ShitDBPager pager) {
-		super();
+		super(conn);
 		this.modelClazz = modelClazz;
-		this.execute = new ShitDBExecuteSQLQuery(conn);
+		this.execute = new ShitDBExecuteSQLQuery();
 		this.shitQL = shitQL;
 		this.paramMap = paramMap;
 		this.pager = pager;
@@ -66,7 +66,8 @@ public class ShitDBDaoQuery extends ShitDBDao<ShitDBExecuteSQLQuery, ResultSet> 
 	 *            数据库连接
 	 */
 	public ShitDBDaoQuery(Connection conn) {
-		this.execute = new ShitDBExecuteSQLQuery(conn);
+		super(conn);
+		this.execute = new ShitDBExecuteSQLQuery();
 	}
 	
 	/**
@@ -109,13 +110,13 @@ public class ShitDBDaoQuery extends ShitDBDao<ShitDBExecuteSQLQuery, ResultSet> 
 	}
 
 	@Override
-	public ResultSet excute() throws ShitDBExecuteException, ShitDBTranslateException {
+	public ResultSet execute() throws ShitDBExecuteException, ShitDBTranslateException {
 		setTranslator();
 		String sql = translator.getSql();
 		if (showSql) {
 			System.out.println(sql);
 		}
-		return execute.execute(sql, translator.getParamList());
+		return execute.execute(conn, sql, translator.getParamList());
 	}
 
 }

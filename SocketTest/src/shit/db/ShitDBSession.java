@@ -123,14 +123,14 @@ public interface ShitDBSession {
 			Map<String, Serializable> params, ShitDBPager pager) throws ShitDBJDBCException,
 					ShitDBWrongControlException, ShitDBConfigureException, ShitDBTranslateException;
 
-	/**
-	 * 获取查询体
-	 * 
-	 * @param clazz
-	 *            查询的结果类
-	 * @return 获取查询体
-	 */
-	public ShitDBQuery query(Class<? extends Serializable> clazz);
+//	/**
+//	 * 获取查询体
+//	 *
+//	 * @param clazz
+//	 *            查询的结果类
+//	 * @return 获取查询体
+//	 */
+//	public ShitDBQuery query(Class<? extends Serializable> clazz);
 
 	/**
 	 * 查询所有结果

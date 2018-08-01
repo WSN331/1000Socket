@@ -1,6 +1,7 @@
 package shit.db.impl;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,11 +9,8 @@ import java.util.Map;
 import java.sql.Connection;
 
 import shit.db.ShitDBSession;
-import shit.db.exception.ShitDBConfigureException;
-import shit.db.exception.ShitDBExecuteException;
-import shit.db.exception.ShitDBJDBCException;
-import shit.db.exception.ShitDBTranslateException;
-import shit.db.exception.ShitDBWrongControlException;
+import shit.db.connection.ShitDBConnection;
+import shit.db.exception.*;
 import shit.db.execute.ShitDBDaoDelete;
 import shit.db.execute.ShitDBDaoSave;
 import shit.db.execute.ShitDBDaoUpdate;
@@ -29,15 +27,15 @@ import shit.helper.ShitReflectHelper;
  */
 public abstract class ShitDBSessionBasic implements ShitDBSession {
 
-	protected Connection conn;
+	protected ShitDBConnection conn;
 
 	protected boolean showSql;
 
-	public ShitDBSessionBasic(Connection conn) {
+	public ShitDBSessionBasic(ShitDBConnection conn) {
 		this(conn, false);
 	}
 
-	public ShitDBSessionBasic(Connection conn, boolean showSql) {
+	public ShitDBSessionBasic(ShitDBConnection conn, boolean showSql) {
 		super();
 		this.setConn(conn);
 		this.showSql = showSql;
@@ -47,31 +45,55 @@ public abstract class ShitDBSessionBasic implements ShitDBSession {
 		this.showSql = showSql;
 	}
 
-	public void setConn(Connection conn) {
+	public void setConn(ShitDBConnection conn) {
 		this.conn = conn;
+	}
+
+	protected Connection getExecConn() throws ShitDBExecuteException {
+		try {
+			return conn.getConnection();
+		} catch (ShitDBConnectException e) {
+			e.printStackTrace();
+			throw new ShitDBExecuteException("数据连接异常");
+		}
+	}
+
+	protected void closeConn(Connection connection) throws ShitDBExecuteException {
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ShitDBExecuteException("连接关闭异常");
+		}
 	}
 
 	@Override
 	public Serializable save(Serializable model) throws ShitDBExecuteException, ShitDBConfigureException {
-		ShitDBDaoSave save = new ShitDBDaoSave(conn, model);
+		Connection execConn = getExecConn();
+		ShitDBDaoSave save = new ShitDBDaoSave(execConn, model);
 		save.setShowSql(showSql);
 		try {
-			return save.excute();
+			return save.execute();
 		} catch (ShitDBTranslateException e) {
 			e.printStackTrace();
 			throw new ShitDBConfigureException("model类" + model.getClass().getName() + "配置异常");
+		} finally {
+			closeConn(execConn);
 		}
 	}
 
 	@Override
 	public Serializable update(Serializable model) throws ShitDBExecuteException, ShitDBConfigureException {
-		ShitDBDaoUpdate update = new ShitDBDaoUpdate(conn, model);
+		Connection execConn = getExecConn();
+		ShitDBDaoUpdate update = new ShitDBDaoUpdate(execConn, model);
 		update.setShowSql(showSql);
 		try {
-			return update.excute();
+			return update.execute();
 		} catch (ShitDBTranslateException e) {
 			e.printStackTrace();
 			throw new ShitDBConfigureException("model类" + model.getClass().getName() + "配置异常");
+		} finally {
+			closeConn(execConn);
 		}
 	}
 
@@ -148,13 +170,16 @@ public abstract class ShitDBSessionBasic implements ShitDBSession {
 
 	@Override
 	public void delete(Serializable model) throws ShitDBExecuteException, ShitDBConfigureException {
-		ShitDBDaoDelete delete = new ShitDBDaoDelete(conn, model);
+		Connection execConn = getExecConn();
+		ShitDBDaoDelete delete = new ShitDBDaoDelete(execConn, model);
 		delete.setShowSql(showSql);
 		try {
-			delete.excute();
+			delete.execute();
 		} catch (ShitDBTranslateException e) {
 			e.printStackTrace();
 			throw new ShitDBConfigureException("model类" + model.getClass().getName() + "配置异常");
+		} finally {
+			closeConn(execConn);
 		}
 
 	}

@@ -3,6 +3,7 @@ package shit.db.execute;
 import java.io.Serializable;
 import java.sql.Connection;
 
+import shit.db.connection.ShitDBConnection;
 import shit.db.exception.ShitDBExecuteException;
 import shit.db.exception.ShitDBTranslateException;
 import shit.db.sql.ShitQLDelete;
